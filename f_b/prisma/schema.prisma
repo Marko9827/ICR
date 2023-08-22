@@ -7,31 +7,28 @@ datasource db {
     url      = "mysql://root:Nikolicmarko9827**@localhost:3306/icr"
 }
 
-model CmsAdmin {
-    id                              Int                               @id
-    date_time                       String?
-    username                        String?
-    password                        String?
-    added_by                        String?
-    img                             String?
-    status                          String?                           @default("1")
-    fname                           String?
-    followers                       String?
-    birthday                        String?
-    email                           String?                           @unique
-    web                             String?
-    description                     String?
-    connection_id                   String?
-    wallet                          Int
-    session_id                      String?
-    cover                           String?
-    is_admin                        Int                               @default(0)
-    verify_bagde                    Int
-    Lang                            Int
-    Google_token                    String?
-    Github_token                    String?
-    vk_token                        String?
-    verification_code               String?
+model user {
+    id            Int     @id @unique
+    date_time     String?
+    username      String
+    email         String
+    password      String?
+    adress        String?
+    phone         BigInt  @unique
+    plane_best    Int
+    login_history Int
 
-    @@map(name: "cms_admin")
+    @@map(name: "user")
+}
+
+model flights {
+    flights_id Int   @id
+    name       String
+    loc_a      String
+    loc_b      String
+    airport_a  String // ->>>
+    airport_b  String // <<<-
+
+
+    @@map(name: "flights")
 }

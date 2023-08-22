@@ -20,13 +20,10 @@
 </IfModule>
 
 
-Options -Indexes
+Options -Indexes   
 
 
-<IfModule mod_rewrite.c>
-
-    RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(.*)$ index.php?p=$1 [L]
-</IfModule>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?p=$1 [L]

@@ -3,7 +3,8 @@
     "pr": "npx prisma migrate dev --name init"
   },
   "dependencies": {
-    "bootstrap": "^5.3.1",
+    "@prisma/client": "^5.1.1",
+    "bootstrap": "^5.0.1",
     "prisma": "^5.1.1"
   }
 }

@@ -1,0 +1,30 @@
+-- CreateTable
+CREATE TABLE `cms_admin` (
+    `id` INTEGER NOT NULL,
+    `date_time` VARCHAR(191) NULL,
+    `username` VARCHAR(191) NULL,
+    `password` VARCHAR(191) NULL,
+    `added_by` VARCHAR(191) NULL,
+    `img` VARCHAR(191) NULL,
+    `status` VARCHAR(191) NULL DEFAULT '1',
+    `fname` VARCHAR(191) NULL,
+    `followers` VARCHAR(191) NULL,
+    `birthday` VARCHAR(191) NULL,
+    `email` VARCHAR(191) NULL,
+    `web` VARCHAR(191) NULL,
+    `description` VARCHAR(191) NULL,
+    `connection_id` VARCHAR(191) NULL,
+    `wallet` INTEGER NOT NULL,
+    `session_id` VARCHAR(191) NULL,
+    `cover` VARCHAR(191) NULL,
+    `is_admin` INTEGER NOT NULL DEFAULT 0,
+    `verify_bagde` INTEGER NOT NULL,
+    `Lang` INTEGER NOT NULL,
+    `Google_token` VARCHAR(191) NULL,
+    `Github_token` VARCHAR(191) NULL,
+    `vk_token` VARCHAR(191) NULL,
+    `verification_code` VARCHAR(191) NULL,
+
+    UNIQUE INDEX `cms_admin_email_key`(`email`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
