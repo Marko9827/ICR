@@ -5,5 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo $this->pginfo($_GET['p']); ?></title>
   <!-- Include Bootstrap CSS -->
-  <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <style type="text/css"> 
+     <?php 
+     
+     $this->include("components/css/main.css");
+     ?>
+  </style>
+  <link href="/f_b/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>

@@ -44,8 +44,9 @@ model flights {
     image         String
     class_flights String
     price         BigInt
-    time_flight   DateTime
+    time_flight   String
     reactions     Int // Recentzije
+    status        Int @default(0)
 
     @@map(name: "flights")
 }
