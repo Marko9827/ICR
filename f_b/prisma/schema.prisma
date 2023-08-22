@@ -18,17 +18,50 @@ model user {
     plane_best    Int
     login_history Int
 
+    rezerved rezerved[]
+
     @@map(name: "user")
 }
 
-model flights {
-    flights_id Int   @id
-    name       String
-    loc_a      String
-    loc_b      String
-    airport_a  String // ->>>
-    airport_b  String // <<<-
+model rezerved {
+    rezerved_id Int @id
+    user_id     Int
+    time        Int 
+    rezerved user @relation(fields: [user_id], references: [id])
 
+    @@map(name: "rezerved")
+}
+
+model flights {
+    flights_id    Int      @id
+    name          String
+    loc_a         String
+    loc_b         String
+    airport_a     String // ->>>
+    airport_b     String // <<<-
+    descr         String
+    image         String
+    class_flights String
+    price         BigInt
+    time_flight   DateTime
+    reactions     Int // Recentzije
 
     @@map(name: "flights")
+}
+
+model Journal {
+    flights_id    Int      @id
+    name          String
+    loc_a         String
+    loc_b         String
+    airport_a     String // ->>>
+    airport_b     String // <<<-
+    descr         String
+    image         String
+    class_flights String
+    price         BigInt
+    time_flight   String
+    reactions     Int // Recentzije
+
+    @@map(name: "Journal")
 }
