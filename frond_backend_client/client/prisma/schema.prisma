@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  email         String    @unique
+  emailVerifed  DateTime?
+  name          String?
+  admin         Int?
+  hashedPasword String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  Products      Product[]
+  accounts Account[]
+
+}
+
+
+model Account {
+  id Int @id @default(autoincrement()) @map("id") @db.Int
+  userId Int @db.Int
+  type String
+  provider String
+  providerAccountId String
+  refresh_token String? 
+  access_token String?  
+  expires_at Int?
+  token_type String?
+  scope String?
+  id_token String?  
+  session_state String?
+   
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+
+model Product {
+  id          Int    @id @default(autoincrement())
+  os          String
+  ram         String
+  ssd         String // memorija telefona
+  screen      String
+  price       String 
+  networks    String
+  category    String
+  tsStandard  String?
+  description String?
+  name        String
+  image       String? 
+  published   Boolean @default(false)
+  author      User    @relation(fields: [authorId], references: [id])
+  authorId    Int
+  
+}
+    
