@@ -1,0 +1,37 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = "mysql://root:Nikolicmarko9827**@localhost:3306/icr"
+}
+
+model CmsAdmin {
+    id                              Int                               @id
+    date_time                       String?
+    username                        String?
+    password                        String?
+    added_by                        String?
+    img                             String?
+    status                          String?                           @default("1")
+    fname                           String?
+    followers                       String?
+    birthday                        String?
+    email                           String?                           @unique
+    web                             String?
+    description                     String?
+    connection_id                   String?
+    wallet                          Int
+    session_id                      String?
+    cover                           String?
+    is_admin                        Int                               @default(0)
+    verify_bagde                    Int
+    Lang                            Int
+    Google_token                    String?
+    Github_token                    String?
+    vk_token                        String?
+    verification_code               String?
+
+    @@map(name: "cms_admin")
+}
