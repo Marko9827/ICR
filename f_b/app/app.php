@@ -16,9 +16,9 @@ class ICR
     {
 
  
-        if (!empty($_GET['p'])) {
+        
             $this->pageloader($_GET['p']);
-        }
+       
     }
 
 
