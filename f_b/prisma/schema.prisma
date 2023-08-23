@@ -13,7 +13,7 @@ model user {
     date_time     String?
     username      String
     surname       String
-    email         String
+    email         String  @unique
     password      String?
     adress        String?
     phone         BigInt  @unique
@@ -25,7 +25,7 @@ model user {
 
 model rezerved {
     rezerved_id BigInt @id
-    user_id     Int
+    user_id     BigInt
     time        Int
     flight_id   Int
     time_start  String

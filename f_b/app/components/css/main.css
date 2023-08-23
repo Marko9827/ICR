@@ -161,6 +161,7 @@
   margin: 30px auto;
   margin-top: 0px;
   border-radius: 100px;
+  object-fit: cover;
 }
 
 .image_upload {
@@ -306,10 +307,7 @@ small.text-muted.class-display-flex {
 .bot_btn:hover {
   opacity: 1;
 }
-
-button[type="button"] {
-  height: fit-content;
-}
+ 
 
 @media (max-width: 608px) {
   .container[data-type="journal_all"] .card-body .card_body_grid {
@@ -339,4 +337,9 @@ button[type="button"] {
 .btn_twos {
   width: 45% !important;
   margin: 15px auto;
+}
+
+
+button[type="button"] {
+  height: fit-content !important; 
 }

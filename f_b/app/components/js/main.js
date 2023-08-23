@@ -303,7 +303,7 @@ var ICR = {
                         if (res == "YES") {
                             if (what == "ticked_edit" || what == "ticked_del") {
                                 window.location.reload();
-                            } else  {
+                            } else {
                                 window.location.href = "./?p=Journal";
                             }
                         }
@@ -361,15 +361,15 @@ var ICR = {
         if (w == "reg") {
             data = {
                 what: w,
-                username: $(".modal#login_modal #inputUsername").val(),
-                surname: $(".modal#login_modal #inputSurname").val(),
-                email: $(".modal#login_modal #inputEmail").val(),
-                password: $(".modal#login_modal #inputPassword").val(),
-                address: $(".modal#login_modal #inputAdresse").val(),
-                phone: $(".modal#login_modal #inputPhone").val()
+                username: $(".modal#reg_modal #inputUsername").val(),
+                 surname: $(".modal#reg_modal #inputSurname").val(),
+                   email: $(".modal#reg_modal #inputEmail").val(),
+                password: $(".modal#reg_modal #inputPassword").val(),
+                 address: $(".modal#reg_modal #inputAdresse").val(),
+                   phone: $(".modal#reg_modal #inputPhone").val()
             };
         }
-
+        console.log(data);
         $.ajax({
             type: "POST",
             url: "./?q=login_reg",

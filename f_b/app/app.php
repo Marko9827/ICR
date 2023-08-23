@@ -99,6 +99,7 @@ class ICR
                 $sql = $this->Query("INSERT INTO `rezerved` (`rezerved_id`, `user_id`, `time`, `flight_id`, `time_end`, `time_start`, `airport_a`) VALUES 
                 ('$id', '$_SESSION[user_id]', '$time', '$ticked_d', '$time_start', '$time_end', '$_POST[airport_a]');");
 
+ 
                 if ($sql) {
                     echo "YES";
                 }
@@ -132,7 +133,9 @@ class ICR
                 '$_POST[address]', 
                 '$_POST[phone]', 
                 '0', '0', '0');");
-                    if (mysqli_num_rows($sql) > 0) {
+                    if ($sql) {
+                        session_regenerate_id();
+
                         $_SESSION['user_id'] = $id;
                         echo "YES";
                     }
@@ -142,6 +145,23 @@ class ICR
             } else {
             }
         }
+    }
+    function uploadFile($name,$FILE){
+        $target_dir = "uploads/";
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$uploadOk = 1;
+$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+// Check if image file is a actual image or fake image
+if(isset($_POST["submit"])) {
+  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+  if($check !== false) {
+    echo "File is an image - " . $check["mime"] . ".";
+    $uploadOk = 1;
+  } else {
+    echo "File is not an image.";
+    $uploadOk = 0;
+  }
+}
     }
 
     function config()
@@ -298,9 +318,9 @@ class ICR
                     if (mysqli_num_rows($sql2) > 0) {
                         $row2 = mysqli_fetch_assoc($sql2);
 
-              ?>
+                    ?>
 
-<div class="col-md-4">
+                        <div class="col-md-4">
                             <div class="card mb-4 box-shadow">
                                 <?php
                                 echo $this->ticked_complete("$row[flights_id]");
@@ -337,7 +357,7 @@ class ICR
                                 </div>
                             </div>
                         </div>
-<?php 
+                    <?php
                     } else {
 
 
@@ -350,8 +370,8 @@ class ICR
                                 <img class="classimage_height card-img-top" data-src="<?php
                                                                                         echo $this->getimage($row['flights_id']);
                                                                                         ?>" src="<?php
-                                                                                                echo $this->getimage($row['flights_id']);
-                                                                                                ?>" alt="Card image cap">
+                                                                                                    echo $this->getimage($row['flights_id']);
+                                                                                                    ?>" alt="Card image cap">
                                 <div class="card-body">
                                     <p class="card-text"><?php echo $row['name']; ?></p>
                                     <div class="card_body_grid d-flex justify-content-between align-items-center">

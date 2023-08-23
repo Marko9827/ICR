@@ -28,7 +28,7 @@
               <img src="<?php echo "./?f=cover&u=p$_SESSION[user_id]"; ?>" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
             <ul class="dropdown-menu text-small">
-              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="./?p=settings">Settings</a></li>
               <li><a class="dropdown-item" href="./?p=profile">Profile</a></li>
               <li>
                 <hr class="dropdown-divider">
