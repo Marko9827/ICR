@@ -4,7 +4,7 @@ const path = require ('path');
 const { setSocketInstance } = require("socket.io")
 
 const app = express();
-const port = process.env.PORT || "8000";
+const port = 3005 || process.env.PORT;
 
 const server = http.Server(app);
 setSocketInstance(server);
