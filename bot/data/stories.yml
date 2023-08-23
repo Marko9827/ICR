@@ -9,6 +9,16 @@ stories:
   - intent: mood_great
   - action: utter_happy
 
+- story: the script
+  steps: 
+  - intent: greet
+  - action: utter_greet
+  - intent: planecartds 
+  - action: actions_list #actions.py... kod u akcijama
+  - intent: buynowarticle #buy now
+  - action: utter_buynowarticle #za poruzbine > posetiti sajt
+
+
 - story: sad path 1
   steps:
   - intent: greet
