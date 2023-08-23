@@ -9,8 +9,7 @@
 
     <main role="main">
 
-
-    <section class="vh-100">
+     <section class="vh-100">
         <div class="container  ">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-lg-6 mb-4 mb-lg-0">
