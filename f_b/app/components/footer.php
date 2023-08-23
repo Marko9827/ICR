@@ -1,6 +1,6 @@
 
-<footer class="py-5 text-center text-body-secondary bg-body-tertiary">
-  <p>By github.com/marko9827<a href="https://github.com/marko9827"> 
+<footer class="  text-center text-body-secondary bg-body-tertiary">
+  By <a href="https://github.com/marko9827">github.com/marko9827</a>
 </footer>
 <?php 
 $this->include("components/bot_ui.php");

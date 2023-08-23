@@ -176,4 +176,32 @@
 
 .margin-auto{
   margin: auto !important;
+}img.background_image {
+  position: fixed;
+  z-index: -1;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  object-fit: cover;
+  opacity: 0.1;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
 }
+
+footer{
+  padding: 10px;
+}
+
+@media (min-width: 768px) {
+ 
+.card-body div.d-flex  {
+  display: grid !important;
+  text-align: center;
+}
+
+
+.card-body div.d-flex small{
+  padding-top:10px;
+}
+}
+ 

@@ -1,6 +1,7 @@
 <?php if ($this->isLoged()) { ?>
     <div class="container">
         <main>
+            <img src="<?php  echo $this->getimage($_GET['id']); ?>" alt="aer" class="background_image"/>
             <div class="py-5 text-center">
 
                 <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
@@ -36,6 +37,13 @@
                                     Please enter a valid email address for shipping updates.
                                 </div>
                             </div>
+                            <div class="col-12">
+                                <label for="Phone" class="form-label">Phone <span class="text-body-secondary">*</span></label>
+                                <input type="Phone" class="form-control" id="Phone" value="<?php echo $this->cuva_id("phone"); ?>" placeholder="aaaxxxxxxxx">
+                                <div class="invalid-feedback">
+                                    Please enter your phone.
+                                </div>
+                            </div>
 
                             <div class="col-12">
                                 <label for="address" class="form-label">Address</label>
@@ -50,7 +58,7 @@
                                 <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
                             </div>
 
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <label for="country" class="form-label">Departure flight</label>
                                 <select class="form-select" id="country" required>
                                     <option value="">Choose...</option>
@@ -61,7 +69,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="state" class="form-label">Destination</label>
                                 <select disabled class="form-select" id="state" required>
                                     <option value="" selected><?php echo $this->cuva_idf("airport_b",$_GET['id']); ?></option>
@@ -73,29 +81,28 @@
                             </div>
 
                             <div class="col-md-3">
-                                <label for="zip" class="form-label">Zip</label>
-                                <select class="form-select" id="country" required>
-                                    <option value="">Choose...</option>
-                                    <option>United States</option>
-                                </select>
+                                <label for="zip" class="form-label">Time of departure</label>
+                                <input class="form-select" placeholder="T.Departure"   type="date" id="departure_airport_a" name="departure_airport_a">
                                 <div class="invalid-feedback">
-                                    Please select a valid country.
+                                    Please provide Time of departure
                                 </div>
                             </div>
-
+                            <div class="col-md-3">
+                                <label for="zip" class="form-label">Date of Return</label>
+                                <input class="form-select"   placeholder="T.Return"   type="date" id="departure_date_Return" name="departure_date_Return">
+                                <div class="invalid-feedback">
+                                    Please provide Date of Return
+                                </div>
+                            </div>
                             
                         </div>
 
                         <hr class="my-4">
-
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="same-address">
-                            <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
-                        </div>
+ 
 
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="save-info">
-                            <label class="form-check-label" for="save-info">Save this information for next time</label>
+                            <label class="form-check-label" for="save-info">I accept if I booked the flight 24 hours before it. That I will be late at my own risk</label>
                         </div>
  
 
