@@ -261,6 +261,16 @@ var ICR = {
     ],
     ui: {
         checkout: {
+            chk: function (t) {
+                if (t.checked) {
+                    $(".checked_disabled_chk").removeAttr("disabled");
+                } else {
+                    $(".checked_disabled_chk").attr("disabled", "true");
+                }
+            },
+            ticket: function(){
+                
+            },
             cr: function () {
                 document.querySelectorAll("#country").forEach(function (v) {
                     v.innerHTML = "<option selected value='Choose...'>Choose...</option>";

@@ -1,0 +1,1 @@
+Obavezno procitati readme.md

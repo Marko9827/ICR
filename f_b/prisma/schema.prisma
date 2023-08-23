@@ -29,13 +29,16 @@ model rezerved {
     rezerved_id Int  @id
     user_id     Int
     time        Int
+    flight_id   Int 
+    time_start  String 
+    time_end    String
     rezerved    user @relation(fields: [user_id], references: [id])
 
     @@map(name: "rezerved")
 }
 
 model flights {
-    flights_id    Int      @id
+    flights_id    Int    @id
     name          String
     loc_a         String
     loc_b         String
@@ -47,7 +50,8 @@ model flights {
     price         BigInt
     time_flight   String
     reactions     Int // Recentzije
-    status        Int @default(0)
+    type_class    Int    @default(0)
+    status        Int    @default(0)
 
     @@map(name: "flights")
 }

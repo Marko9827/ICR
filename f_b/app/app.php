@@ -149,6 +149,18 @@ class ICR
         mysqli_close($con);
         return false;
     }
+    function ticked_complete($id)
+    {
+        $sql =  $this->Query("SELECT * FROM rezerved WHERE flight_id = $id");
+        if (mysqli_num_rows($sql) > 0) {
+            
+                echo '<rezerved><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512" style="
+            fill: white !important;
+            margin-right: 10px;
+        "><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M381 114.9L186.1 41.8c-16.7-6.2-35.2-5.3-51.1 2.7L89.1 67.4C78 73 77.2 88.5 87.6 95.2l146.9 94.5L136 240 77.8 214.1c-8.7-3.9-18.8-3.7-27.3 .6L18.3 230.8c-9.3 4.7-11.8 16.8-5 24.7l73.1 85.3c6.1 7.1 15 11.2 24.3 11.2H248.4c5 0 9.9-1.2 14.3-3.4L535.6 212.2c46.5-23.3 82.5-63.3 100.8-112C645.9 75 627.2 48 600.2 48H542.8c-20.2 0-40.2 4.8-58.2 14L381 114.9zM0 480c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32s-14.3-32-32-32H32c-17.7 0-32 14.3-32 32z"></path></svg>You have already booked a ticket</rezerved>';
+             
+        }
+    }
     function getimage($id)
     {
         $path = __DIR__ . "/upload/flight_$id.png";
@@ -156,17 +168,17 @@ class ICR
         return "data:image/png;base64," . base64_encode(file_get_contents($path));
     }
     function cuva_id($what)
-    { 
+    {
         $query = $this->Query("SELECT * FROM user WHERE user.id = $_SESSION[user_id]");
- 
+
         $row = mysqli_fetch_assoc($query);
 
         return $row[$what];
     }
-    function cuva_idf($what,$id)
-    { 
+    function cuva_idf($what, $id)
+    {
         $query = $this->Query("SELECT * FROM flights WHERE flights.flights_id = $id");
- 
+
         $row = mysqli_fetch_assoc($query);
 
         return $row[$what];
@@ -183,8 +195,13 @@ class ICR
 
 ?>
 
+
+
                     <div class="col-md-4">
                         <div class="card mb-4 box-shadow">
+                            <?php
+                            echo $this->ticked_complete("$row[flights_id]");
+                            ?>
                             <img class="classimage_height card-img-top" data-src="<?php
                                                                                     echo $this->getimage($row['flights_id']);
                                                                                     ?>" src="<?php
@@ -195,11 +212,16 @@ class ICR
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button>
-                                        <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=checkout&id=$row[flights_id]"; ?>">Book a ticket</a>
+                                        <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[flights_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
                                     </div>
-                                    <small class="text-muted"><?php
+                                    <small style="text-align: left;" class="text-muted"><?php
                                                                 echo "$row[time_flight] - $row[price]$";
                                                                 ?></small>
+                               <small style="text-align: left;" class="text-muted class-display-flex"><?php 
+                               echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]<br>
+                               </small><small style='text-align: left;' class='text-muted class-display-flex'>
+                               <i class='bi bi-airplane form-label-rotate-left margin-right-10'></i> Destination: $row[airport_b] </small>";
+                               ?> 
                                 </div>
                             </div>
                         </div>
@@ -223,7 +245,9 @@ class ICR
                 ?>
 
                     <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
+                        <div class="card mb-4 box-shadow"> <?php
+                            echo $this->ticked_complete("$row[flights_id]");
+                            ?>
                             <img class="classimage_height card-img-top" data-src="<?php
                                                                                     echo $this->getimage($row['flights_id']);
                                                                                     ?>" src="<?php
@@ -233,12 +257,19 @@ class ICR
                                 <p class="card-text"><?php echo $row['name']; ?></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button>
+                                        <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button> -->
                                         <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=flight&id=$row[flights_id]"; ?>">Info</a>
+                                        <a class="btn btn-sm btn-primary btn-lg checked_disabled_chk"  type="button" href="./?p=checkout&id=<?php echo $row['flights_id'];  ?>"><i class="bi bi-airplane"></i> Book a ticket</a>
+
                                     </div>
-                                    <small class="text-muted"><?php
+                                    <small style="text-align: left;" class="text-muted"><?php
                                                                 echo "$row[time_flight] - $row[price]$";
                                                                 ?></small>
+                               <small style="text-align: left;" class="text-muted class-display-flex"><?php 
+                               echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]<br>
+                               </small><small style='text-align: left;' class='text-muted class-display-flex'>
+                               <i class='bi bi-airplane form-label-rotate-left margin-right-10'></i> Destination: $row[airport_b] </small>";
+                               ?> 
                                 </div>
                             </div>
                         </div>
