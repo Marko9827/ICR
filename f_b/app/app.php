@@ -163,7 +163,7 @@ class ICR
     }
     function ticked_yes($id){
         $r = false;
-        $sql =  $this->Query("SELECT * FROM rezerved WHERE flight_id = $id");
+        $sql =  $this->Query("SELECT * FROM rezerved WHERE flight_id = $id  AND user_id = $_SESSION[user_id]");
         if (mysqli_num_rows($sql) > 0) {
             $r = true;
         }
@@ -174,7 +174,7 @@ class ICR
     }
     function ticked_complete($id)
     {
-        $sql =  $this->Query("SELECT * FROM rezerved WHERE flight_id = $id");
+        $sql =  $this->Query("SELECT * FROM rezerved WHERE flight_id = $id AND user_id = $_SESSION[user_id]");
         if (mysqli_num_rows($sql) > 0) {
             
                 echo '<rezerved><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512" style="
@@ -215,7 +215,7 @@ class ICR
                 $return = $f;
             } else {
                 while ($row = mysqli_fetch_assoc($query)) {
-                    $sql2 = $this->Query("SELECT * FROM rezerved WHERE rezerved.flight_id = $row[flights_id]");
+                    $sql2 = $this->Query("SELECT * FROM rezerved WHERE rezerved.flight_id = $row[flights_id] AND rezerved.user_id = $_SESSION[user_id]");
                     if(mysqli_num_rows($sql2) > 0){
                         $row2 = mysqli_fetch_assoc($sql2);
 ?>

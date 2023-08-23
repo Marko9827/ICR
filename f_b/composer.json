@@ -3,10 +3,13 @@
     "require": {
         "botman/botman": "^2.8"
     },
+    "scripts": {
+        "sta": "php -S localhost:3001 -dev"
+    },
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Marko\\FrondBackendClient\\": "src/"
+            "Marko\\FrondBackendClient\\": "app/"
         }
     },
     "authors": [

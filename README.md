@@ -1,6 +1,8 @@
 ICR Project
 
-Run f_b(frond - backend) only by Apache, nginx,... But you can't run by this command: php -S localhost:3001
+Run f_b(frond - backend) only by Apache, nginx,... 
+
+But you can run by this command: cd f_b and composer run sta
 
 Link: [http://localhost:3001/f_b/](http://localhost:3001/f_b/)
 

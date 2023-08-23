@@ -21,33 +21,23 @@
         border: 1px #b52626 solid;
     }
 </style>
-
-<script>
-    !(function() {
-        let e = document.createElement("script"),
-            t = document.head || document.getElementsByTagName("head")[0];
-        (e.src =
-            "https://cdn.jsdelivr.net/npm/rasa-webchat/lib/index.js"),
-        // Replace 1.x.x with the version that you want
-        (e.async = !0),
-        (e.onload = () => {
-            window.WebChat.default({
-                    title: 'IRC AIR',
-                    initPayload: '/greet',
-                    customData: {
-                        language: "en"
-                    },
-                    socketUrl: "http://localhost:5005",
-                    // add other props here
-                    profileAvatar: "./img/bot.png",
-                    openLauncherImage: "./img/chat.png",
-                    showFullScreenButton: true,
-                    showMessageDate: true,
-                    inputTextFieldHint: 'What is in your mind..?'
-                },
-                null
-            );
-        }),
-        t.insertBefore(e, t.firstChild);
-    })();
+<script>!(function () {
+  let e = document.createElement("script"),
+    t = document.head || document.getElementsByTagName("head")[0];
+  (e.src =
+    "https://cdn.jsdelivr.net/npm/rasa-webchat@1.x.x/lib/index.js"),
+    // Replace 1.x.x with the version that you want
+    (e.async = !0),
+    (e.onload = () => {
+      window.WebChat.default(
+        {
+          customData: { language: "en" },
+          socketUrl: "https://bf-botfront.development.agents.botfront.cloud",
+          // add other props here
+        },
+        null
+      );
+    }),
+    t.insertBefore(e, t.firstChild);
+})();
 </script>
