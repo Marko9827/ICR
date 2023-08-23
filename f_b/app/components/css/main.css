@@ -310,3 +310,33 @@ small.text-muted.class-display-flex {
 button[type="button"] {
   height: fit-content;
 }
+
+@media (max-width: 608px) {
+  .container[data-type="journal_all"] .card-body .card_body_grid {
+    display: flex !important;
+    justify-content: space-between;
+    position: relative;
+    flex-wrap: wrap;
+  }
+
+}
+
+
+@media (max-width: 608px) {
+  .container[data-type="journal_all"] .card-body .card_body_grid small {
+    margin-top: 6px;
+  }
+
+
+
+}
+
+.container[data-type="journal_all"] .card-body .card_body_grid a,
+.container[data-type="journal_all"] .card-body .card_body_grid button {
+  height: 35px;
+}
+
+.btn_twos {
+  width: 45% !important;
+  margin: 15px auto;
+}

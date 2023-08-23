@@ -8,7 +8,7 @@ datasource db {
 }
 
 model user {
-    id            Int     @id @unique
+    id            BigInt  @id @unique
     admin         Int     @default(0) // Add flights to database
     date_time     String?
     username      String
@@ -20,25 +20,22 @@ model user {
     plane_best    Int
     login_history Int
 
-    rezerved rezerved[]
-
     @@map(name: "user")
 }
 
 model rezerved {
-    rezerved_id Int  @id
+    rezerved_id BigInt @id
     user_id     Int
     time        Int
-    flight_id   Int 
-    time_start  String 
+    flight_id   Int
+    time_start  String
     time_end    String
-    rezerved    user @relation(fields: [user_id], references: [id])
 
     @@map(name: "rezerved")
 }
 
 model flights {
-    flights_id    Int    @id
+    flights_id    BigInt @id
     name          String
     loc_a         String
     loc_b         String
@@ -57,7 +54,7 @@ model flights {
 }
 
 model Journal {
-    flights_id    Int    @id
+    flights_id    BigInt @id
     name          String
     loc_a         String
     loc_b         String

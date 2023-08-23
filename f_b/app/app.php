@@ -91,8 +91,18 @@ class ICR
                 session_destroy();
                 echo "YES";
             } else if ($_POST['what'] == "ticked_add") {
-
-            } else if ($_POST['what'] == "reg") {
+                $id = time() * rand(0,999);
+                $time = time();
+                $ticked_d = $_POST['id'];
+                $time_start = $_POST['start_r'];
+                $time_end = $_POST['start_end'];
+                $sql = $this->Query("INSERT INTO `rezerved` (`rezerved_id`, `user_id`, `time`, `flight_id`, `time_end`, `time_start`) VALUES 
+                ('$id', '$_SESSION[user_id]', '$time', '$ticked_d', '$time_start', '$time_end');");
+                
+            if($sql){
+                echo "YES";
+            }
+        } else if ($_POST['what'] == "reg") {
                 if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])) {
                     $id = time() * rand(0, 999999);
                     $sql = $this->Query("INSERT INTO  `user` 
@@ -205,7 +215,9 @@ class ICR
                 $return = $f;
             } else {
                 while ($row = mysqli_fetch_assoc($query)) {
-
+                    $sql2 = $this->Query("SELECT * FROM rezerved WHERE rezerved.flight_id = $row[flights_id]");
+                    if(mysqli_num_rows($sql2) > 0){
+                        $row2 = mysqli_fetch_assoc($sql2);
 ?>
 
 
@@ -222,7 +234,7 @@ class ICR
                                                                                                 ?>" alt="Card image cap">
                             <div class="card-body">
                                 <p class="card-text"><?php echo $row['name']; ?></p>
-                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="card_body_grid d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button>
                                         <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[flights_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
@@ -233,15 +245,23 @@ class ICR
                                <small style="text-align: left;" class="text-muted class-display-flex"><?php 
                                echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]<br>
                                </small><small style='text-align: left;' class='text-muted class-display-flex'>
-                               <i class='bi bi-airplane form-label-rotate-left margin-right-10'></i> Destination: $row[airport_b] </small>";
-                               ?> 
+                               <i class='bi bi-geo-alt-fill margin-right-10'></i> Destination: $row[airport_b] </small>
+                               
+                               <small style='text-align: left;' class='text-muted class-display-flex'>Time of departure: $row2[time_start]</small>
+                               <small style='text-align: left;' class='text-muted class-display-flex'>Return time: $row2[time_end]</small>
+
+                               ";
+                        
+                        
+                        ?> 
+                               
                                 </div>
                             </div>
                         </div>
                     </div>
                 <?php
                 }
-            }
+            } }
         }
         return $return;
     }
@@ -268,7 +288,7 @@ class ICR
                                                                                                 ?>" alt="Card image cap">
                             <div class="card-body">
                                 <p class="card-text"><?php echo $row['name']; ?></p>
-                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="card_body_grid d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button> -->
                                         <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=flight&id=$row[flights_id]"; ?>">Info</a>

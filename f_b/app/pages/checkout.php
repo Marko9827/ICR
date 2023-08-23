@@ -1,5 +1,5 @@
 <?php if ($this->isLoged()) { ?>
-    <div class="container">
+    <div class="container " >
         <main>
             <img src="<?php echo $this->getimage($_GET['id']); ?>" alt="aer" class="background_image" />
             <div class="py-5 text-center">
@@ -66,7 +66,7 @@
 
                         <hr class="my-4">
 
-                        <button class="w-100 btn btn-primary btn-lg checked_disabled_chk" disabled type="button"><i class="bi bi-airplane"></i> Book a ticket</button>
+                        <button onclick="ICR.ui.checkout.ticket(<?php  echo $_GET['id']; ?>,'ticked_add');" class="w-100 btn btn-primary btn-lg checked_disabled_chk" disabled type="button"><i class="bi bi-airplane"></i> Book a ticket</button>
                     </form>
                 </div>
             </div>

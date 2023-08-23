@@ -268,10 +268,27 @@ var ICR = {
                     $(".checked_disabled_chk").attr("disabled", "true");
                 }
             },
-            ticket:  function(what){
+            ticket: function (id,what) {
+                var data = {};
+                if(what == "ticked_add"){
+                    data = {
+                        id:id,
+                        what:what,
+                        start_r:$("#departure_date").val(),
+                        start_end:$("#departure_date_Return").val()
+                    };
+                }
                 $.ajax({
-                    type:"POST",
-                })
+                    type: "POST",
+                    url: "./?q=login_reg",
+                    data: data,
+                    success: function (res) {
+                        if (res == "YES") {
+                            window.location.href = "./?p=Journal";
+                        }
+                    }
+
+                });
             },
             cr: function () {
                 document.querySelectorAll("#country").forEach(function (v) {
@@ -350,8 +367,8 @@ var ICR = {
             eval(`${R}`)
         }
     },
-    start: function(){
-        document.body.oncontextmenu = () => {return false;};
+    start: function () {
+        document.body.oncontextmenu = () => { return false; };
     }
 }
 
