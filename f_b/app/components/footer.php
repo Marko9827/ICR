@@ -1,3 +1,7 @@
+
+<footer class="py-5 text-center text-body-secondary bg-body-tertiary">
+  <p>By github.com/marko9827<a href="https://github.com/marko9827"> 
+</footer>
 <?php 
 $this->include("components/bot_ui.php");
 ?>

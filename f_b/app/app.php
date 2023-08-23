@@ -25,11 +25,24 @@ class ICR
                 $this->login_reg_logout();
             }
         } else if (!empty($_GET['f'])) {
-            $path = __DIR__ . "/upload/$_GET[f]";
+
+            if (!empty($_GET['u'])) {
+                $path = __DIR__ . "/upload/user/cover_p$_GET[u].png";
+            } else {
+                $path = __DIR__ . "/upload/$_GET[f]";
+            }
             if (file_exists($path)) {
                 if (getimagesize($path)) {
                     header("content-type: image/png");
                     @readfile($path);
+                }
+            } else {
+                if (!empty($_GET['u'])) {
+                    $path = __DIR__ . "/upload/user/default.png";
+                    if (getimagesize($path)) {
+                        header("content-type: image/png");
+                        @readfile($path);
+                    }
                 }
             }
 
@@ -142,39 +155,118 @@ class ICR
 
         return "data:image/png;base64," . base64_encode(file_get_contents($path));
     }
-    function flights_card($sql)
+    function cuva_id($what)
+    { 
+        $query = $this->Query("SELECT * FROM user WHERE user.id = $_SESSION[user_id]");
+ 
+        $row = mysqli_fetch_assoc($query);
+
+        return $row[$what];
+    }
+    function cuva_idf($what,$id)
+    { 
+        $query = $this->Query("SELECT * FROM flights WHERE flights.flights_id = $id");
+ 
+        $row = mysqli_fetch_assoc($query);
+
+        return $row[$what];
+    }
+    function flights_card_fullinfo($sql, $f = false)
     {
+        $return = null;
         $query = $this->Query($sql);
         if (mysqli_num_rows($query) > 0) {
+            if ($f) {
+                $return = $f;
+            } else {
+                while ($row = mysqli_fetch_assoc($query)) {
 
-            while ($row = mysqli_fetch_assoc($query)) {
 ?>
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img class="classimage_height card-img-top" data-src="<?php
-                                                                                echo $this->getimage($row['flights_id']);
-                                                                                ?>" src="<?php
-                                                                                            echo $this->getimage($row['flights_id']);
-                                                                                            ?>" alt="Card image cap">
-                        <div class="card-body">
-                            <p class="card-text"><?php echo $row['name']; ?></p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Info</button>
+
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="classimage_height card-img-top" data-src="<?php
+                                                                                    echo $this->getimage($row['flights_id']);
+                                                                                    ?>" src="<?php
+                                                                                                echo $this->getimage($row['flights_id']);
+                                                                                                ?>" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text"><?php echo $row['name']; ?></p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button>
+                                        <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=checkout&id=$row[flights_id]"; ?>">Book a ticket</a>
+                                    </div>
+                                    <small class="text-muted"><?php
+                                                                echo "$row[time_flight] - $row[price]$";
+                                                                ?></small>
                                 </div>
-                                <small class="text-muted"><?php
-                                                            echo "$row[time_flight] - $row[price]$";
-                                                            ?></small>
                             </div>
                         </div>
                     </div>
-                </div>
-<?php
+                <?php
+                }
             }
         }
+        return $return;
     }
+    function flights_card($sql, $f = false)
+    {
+        $return = null;
+        $query = $this->Query($sql);
+        if (mysqli_num_rows($query) > 0) {
+            if ($f) {
+                $return = $f;
+            } else {
+                while ($row = mysqli_fetch_assoc($query)) {
 
+                ?>
+
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="classimage_height card-img-top" data-src="<?php
+                                                                                    echo $this->getimage($row['flights_id']);
+                                                                                    ?>" src="<?php
+                                                                                                echo $this->getimage($row['flights_id']);
+                                                                                                ?>" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text"><?php echo $row['name']; ?></p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button>
+                                        <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=flight&id=$row[flights_id]"; ?>">Info</a>
+                                    </div>
+                                    <small class="text-muted"><?php
+                                                                echo "$row[time_flight] - $row[price]$";
+                                                                ?></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<?php
+                }
+            }
+        }
+        return $return;
+    }
+    function menu_active($page)
+    {
+        $array = ["Home", "Journal", "Help"];
+        $r = '';
+        foreach ($array as $val) {
+            if ($page == $val) {
+                $r .= "<li><a href='./?p=$val' class='nav-link px-2 link-body-emphasis'>$val</a></li>";
+            } else {
+                $r .= "<li><a href='./?p=$val' class='nav-link px-2  link-secondary  '>$val</a></li>";
+            }
+        }
+        return $r;
+        /*
+        <li><a href="./" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="./?p=journal" class="nav-link px-2 link-body-emphasis">Journal</a></li>
+        <li><a href="#" class="nav-link px-2 link-secondary">Help</a></li>
+    */
+    }
     function pageloader($page)
     {
         $this->include("components/header.php");

@@ -173,3 +173,7 @@
   padding: 12px 0px !important;
   margin-bottom: 0px !important;
 }
+
+.margin-auto{
+  margin: auto !important;
+}
