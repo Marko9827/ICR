@@ -90,6 +90,8 @@ class ICR
             } else if ($_POST['what'] == "logout") {
                 session_destroy();
                 echo "YES";
+            } else if ($_POST['what'] == "ticked_add") {
+
             } else if ($_POST['what'] == "reg") {
                 if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])) {
                     $id = time() * rand(0, 999999);
@@ -148,6 +150,17 @@ class ICR
         }
         mysqli_close($con);
         return false;
+    }
+    function ticked_yes($id){
+        $r = false;
+        $sql =  $this->Query("SELECT * FROM rezerved WHERE flight_id = $id");
+        if (mysqli_num_rows($sql) > 0) {
+            $r = true;
+        }
+        return $r;
+    }
+    function ticked_add(){
+
     }
     function ticked_complete($id)
     {
@@ -259,8 +272,14 @@ class ICR
                                     <div class="btn-group">
                                         <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button> -->
                                         <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=flight&id=$row[flights_id]"; ?>">Info</a>
+                                        <?php if(!$this->ticked_yes($row['flights_id'])) { ?>
                                         <a class="btn btn-sm btn-primary btn-lg checked_disabled_chk"  type="button" href="./?p=checkout&id=<?php echo $row['flights_id'];  ?>"><i class="bi bi-airplane"></i> Book a ticket</a>
+                                        <?php }  else {
+                                            ?>
+                                        <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[flights_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
 
+                                            <?php
+                                            }?>
                                     </div>
                                     <small style="text-align: left;" class="text-muted"><?php
                                                                 echo "$row[time_flight] - $row[price]$";

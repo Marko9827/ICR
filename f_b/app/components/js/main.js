@@ -268,8 +268,10 @@ var ICR = {
                     $(".checked_disabled_chk").attr("disabled", "true");
                 }
             },
-            ticket: function(){
-                
+            ticket:  function(what){
+                $.ajax({
+                    type:"POST",
+                })
             },
             cr: function () {
                 document.querySelectorAll("#country").forEach(function (v) {
@@ -347,5 +349,10 @@ var ICR = {
         msg: function (R) {
             eval(`${R}`)
         }
+    },
+    start: function(){
+        document.body.oncontextmenu = () => {return false;};
     }
 }
+
+ICR.start();

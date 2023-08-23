@@ -295,12 +295,18 @@ div.bot_btn i {
 
 small.text-muted.class-display-flex {
   display: flex;
-}.bot_btn {
-  transition: .3s;
-  opacity: 0.5;
-  z-index:3333;
 }
 
-.bot_btn:hover{
-  opacity:1;
+.bot_btn {
+  transition: .3s;
+  opacity: 0.5;
+  z-index: 3333;
+}
+
+.bot_btn:hover {
+  opacity: 1;
+}
+
+button[type="button"] {
+  height: fit-content;
 }
