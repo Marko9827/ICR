@@ -8,11 +8,16 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - product_list
+  - buynowarticle
 
 responses:
   utter_greet:
   - text: "Hey! How are you?"
-
+  
+  utter_buynowarticle:
+  - text: "To order, please visit our website: "
+  
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
     image: "https://i.imgur.com/nGF1K8f.jpg"
@@ -28,6 +33,9 @@ responses:
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
+
+actions:
+  - actions_list 
 
 session_config:
   session_expiration_time: 60

@@ -35,7 +35,7 @@ class ActionCarousel(Action):
                         "buttons": [
                             {
                                 "title": "Details", #details -> kao dugme
-                                "url": "https://us.puma.com/us/en/pd/viz-runner-repeat-mens-running-sneakers/377333?swatch=01&size=0160",
+                                "url": "http://localhost:3001/?f=flight_0.png",
                                 "type": "web_url"
                             },
                             {
