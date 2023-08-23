@@ -1,5 +1,5 @@
 <main role="main">
-<img src=".//?f=wallp/254381.png" alt="aer" loading="lazy" class="background_image"/>
+<img src="./?f=wallp/254381.png" alt="aer" loading="lazy" class="background_image"/>
 
 
 <div class="album py-5  ">

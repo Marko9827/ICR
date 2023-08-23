@@ -91,18 +91,36 @@ class ICR
                 session_destroy();
                 echo "YES";
             } else if ($_POST['what'] == "ticked_add") {
-                $id = time() * rand(0,999);
+                $id = time() * rand(0, 999);
                 $time = time();
                 $ticked_d = $_POST['id'];
                 $time_start = $_POST['start_r'];
                 $time_end = $_POST['start_end'];
-                $sql = $this->Query("INSERT INTO `rezerved` (`rezerved_id`, `user_id`, `time`, `flight_id`, `time_end`, `time_start`) VALUES 
-                ('$id', '$_SESSION[user_id]', '$time', '$ticked_d', '$time_start', '$time_end');");
-                
-            if($sql){
-                echo "YES";
-            }
-        } else if ($_POST['what'] == "reg") {
+                $sql = $this->Query("INSERT INTO `rezerved` (`rezerved_id`, `user_id`, `time`, `flight_id`, `time_end`, `time_start`, `airport_a`) VALUES 
+                ('$id', '$_SESSION[user_id]', '$time', '$ticked_d', '$time_start', '$time_end', '$_POST[airport_a]');");
+
+                if ($sql) {
+                    echo "YES";
+                }
+            } else if ($_POST['what'] == "ticked_del") {
+                $sql = $this->Query("DELETE FROM `rezerved` WHERE (`rezerved_id` = '$_POST[id]')");
+                if ($sql) {
+                    echo "YES";
+                }
+            } else if ($_POST['what'] == "ticked_edit") {
+                $id = time() * rand(0, 999);
+                $time = time();
+                $ticked_d = $_POST['id'];
+                $time_start = $_POST['start_r'];
+                $time_end = $_POST['start_end'];
+                // UPDATE `icr`.`rezerved` SET `time_end` = '2023-08-25', `time_start` = '2023-08-30', `airport_a` = '235a' WHERE (`rezerved_id` = '843027248400');
+
+                $sql = $this->Query("UPDATE `rezerved` SET `time_end` = '$time_end', `time_start` = '$time_start', `airport_a` = '$_POST[airport_a]' WHERE (`rezerved_id` = '$ticked_d');");
+
+                if ($sql) {
+                    echo "YES";
+                }
+            } else if ($_POST['what'] == "reg") {
                 if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])) {
                     $id = time() * rand(0, 999999);
                     $sql = $this->Query("INSERT INTO  `user` 
@@ -161,7 +179,8 @@ class ICR
         mysqli_close($con);
         return false;
     }
-    function ticked_yes($id){
+    function ticked_yes($id)
+    {
         $r = false;
         $sql =  $this->Query("SELECT * FROM rezerved WHERE flight_id = $id  AND user_id = $_SESSION[user_id]");
         if (mysqli_num_rows($sql) > 0) {
@@ -169,19 +188,18 @@ class ICR
         }
         return $r;
     }
-    function ticked_add(){
-
+    function ticked_add()
+    {
     }
     function ticked_complete($id)
     {
         $sql =  $this->Query("SELECT * FROM rezerved WHERE flight_id = $id AND user_id = $_SESSION[user_id]");
         if (mysqli_num_rows($sql) > 0) {
-            
-                echo '<rezerved><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512" style="
+
+            echo '<rezerved><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512" style="
             fill: white !important;
             margin-right: 10px;
         "><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M381 114.9L186.1 41.8c-16.7-6.2-35.2-5.3-51.1 2.7L89.1 67.4C78 73 77.2 88.5 87.6 95.2l146.9 94.5L136 240 77.8 214.1c-8.7-3.9-18.8-3.7-27.3 .6L18.3 230.8c-9.3 4.7-11.8 16.8-5 24.7l73.1 85.3c6.1 7.1 15 11.2 24.3 11.2H248.4c5 0 9.9-1.2 14.3-3.4L535.6 212.2c46.5-23.3 82.5-63.3 100.8-112C645.9 75 627.2 48 600.2 48H542.8c-20.2 0-40.2 4.8-58.2 14L381 114.9zM0 480c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32s-14.3-32-32-32H32c-17.7 0-32 14.3-32 32z"></path></svg>You have already booked a ticket</rezerved>';
-             
         }
     }
     function getimage($id)
@@ -216,34 +234,34 @@ class ICR
             } else {
                 while ($row = mysqli_fetch_assoc($query)) {
                     $sql2 = $this->Query("SELECT * FROM rezerved WHERE rezerved.flight_id = $row[flights_id] AND rezerved.user_id = $_SESSION[user_id]");
-                    if(mysqli_num_rows($sql2) > 0){
+                    if (mysqli_num_rows($sql2) > 0) {
                         $row2 = mysqli_fetch_assoc($sql2);
 ?>
 
 
 
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <?php
-                            echo $this->ticked_complete("$row[flights_id]");
-                            ?>
-                            <img class="classimage_height card-img-top" data-src="<?php
-                                                                                    echo $this->getimage($row['flights_id']);
-                                                                                    ?>" src="<?php
-                                                                                                echo $this->getimage($row['flights_id']);
-                                                                                                ?>" alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text"><?php echo $row['name']; ?></p>
-                                <div class="card_body_grid d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button>
-                                        <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[flights_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
-                                    </div>
-                                    <small style="text-align: left;" class="text-muted"><?php
-                                                                echo "$row[time_flight] - $row[price]$";
-                                                                ?></small>
-                               <small style="text-align: left;" class="text-muted class-display-flex"><?php 
-                               echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]<br>
+                        <div class="col-md-4">
+                            <div class="card mb-4 box-shadow">
+                                <?php
+                                echo $this->ticked_complete("$row[flights_id]");
+                                ?>
+                                <img class="classimage_height card-img-top" data-src="<?php
+                                                                                        echo $this->getimage($row['flights_id']);
+                                                                                        ?>" src="<?php
+                                                                                                    echo $this->getimage($row['flights_id']);
+                                                                                                    ?>" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text"><?php echo $row['name']; ?></p>
+                                    <div class="card_body_grid d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button>
+                                            <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[flights_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
+                                        </div>
+                                        <small style="text-align: left;" class="text-muted"><?php
+                                                                                            echo "$row[time_flight] - $row[price]$";
+                                                                                            ?></small>
+                                        <small style="text-align: left;" class="text-muted class-display-flex"><?php
+                                                                                                                echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]<br>
                                </small><small style='text-align: left;' class='text-muted class-display-flex'>
                                <i class='bi bi-geo-alt-fill margin-right-10'></i> Destination: $row[airport_b] </small>
                                
@@ -251,17 +269,18 @@ class ICR
                                <small style='text-align: left;' class='text-muted class-display-flex'>Return time: $row2[time_end]</small>
 
                                ";
-                        
-                        
-                        ?> 
-                               
+
+
+                                                                                                                ?>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                <?php
+                    <?php
+                    }
                 }
-            } }
+            }
         }
         return $return;
     }
@@ -275,45 +294,92 @@ class ICR
             } else {
                 while ($row = mysqli_fetch_assoc($query)) {
 
-                ?>
+                    $sql2 = $this->Query("SELECT * FROM rezerved WHERE rezerved.flight_id = $row[flights_id] AND rezerved.user_id = $_SESSION[user_id]");
+                    if (mysqli_num_rows($sql2) > 0) {
+                        $row2 = mysqli_fetch_assoc($sql2);
 
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow"> <?php
-                            echo $this->ticked_complete("$row[flights_id]");
-                            ?>
-                            <img class="classimage_height card-img-top" data-src="<?php
-                                                                                    echo $this->getimage($row['flights_id']);
-                                                                                    ?>" src="<?php
-                                                                                                echo $this->getimage($row['flights_id']);
-                                                                                                ?>" alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text"><?php echo $row['name']; ?></p>
-                                <div class="card_body_grid d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button> -->
-                                        <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=flight&id=$row[flights_id]"; ?>">Info</a>
-                                        <?php if(!$this->ticked_yes($row['flights_id'])) { ?>
-                                        <a class="btn btn-sm btn-primary btn-lg checked_disabled_chk"  type="button" href="./?p=checkout&id=<?php echo $row['flights_id'];  ?>"><i class="bi bi-airplane"></i> Book a ticket</a>
-                                        <?php }  else {
-                                            ?>
-                                        <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[flights_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
+              ?>
 
-                                            <?php
-                                            }?>
-                                    </div>
-                                    <small style="text-align: left;" class="text-muted"><?php
-                                                                echo "$row[time_flight] - $row[price]$";
-                                                                ?></small>
-                               <small style="text-align: left;" class="text-muted class-display-flex"><?php 
-                               echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]<br>
+<div class="col-md-4">
+                            <div class="card mb-4 box-shadow">
+                                <?php
+                                echo $this->ticked_complete("$row[flights_id]");
+                                ?>
+                                <img class="classimage_height card-img-top" data-src="<?php
+                                                                                        echo $this->getimage($row['flights_id']);
+                                                                                        ?>" src="<?php
+                                                                                                    echo $this->getimage($row['flights_id']);
+                                                                                                    ?>" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text"><?php echo $row['name']; ?></p>
+                                    <div class="card_body_grid d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button>
+                                            <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[flights_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
+                                        </div>
+                                        <small style="text-align: left;" class="text-muted"><?php
+                                                                                            echo "$row[time_flight] - $row[price]$";
+                                                                                            ?></small>
+                                        <small style="text-align: left;" class="text-muted class-display-flex"><?php
+                                                                                                                echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]<br>
                                </small><small style='text-align: left;' class='text-muted class-display-flex'>
-                               <i class='bi bi-airplane form-label-rotate-left margin-right-10'></i> Destination: $row[airport_b] </small>";
-                               ?> 
+                               <i class='bi bi-geo-alt-fill margin-right-10'></i> Destination: $row[airport_b] </small>
+                               
+                               <small style='text-align: left;' class='text-muted class-display-flex'>Time of departure: $row2[time_start]</small>
+                               <small style='text-align: left;' class='text-muted class-display-flex'>Return time: $row2[time_end]</small>
+
+                               ";
+
+
+                                                                                                                ?>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-<?php
+<?php 
+                    } else {
+
+
+                    ?>
+
+                        <div class="col-md-4">
+                            <div class="card mb-4 box-shadow"> <?php
+                                                                echo $this->ticked_complete("$row[flights_id]");
+                                                                ?>
+                                <img class="classimage_height card-img-top" data-src="<?php
+                                                                                        echo $this->getimage($row['flights_id']);
+                                                                                        ?>" src="<?php
+                                                                                                echo $this->getimage($row['flights_id']);
+                                                                                                ?>" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text"><?php echo $row['name']; ?></p>
+                                    <div class="card_body_grid d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button> -->
+                                            <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=flight&id=$row[flights_id]"; ?>">Info</a>
+                                            <?php if (!$this->ticked_yes($row['flights_id'])) { ?>
+                                                <a class="btn btn-sm btn-primary btn-lg checked_disabled_chk" type="button" href="./?p=checkout&id=<?php echo $row['flights_id'];  ?>"><i class="bi bi-airplane"></i> Book a ticket</a>
+                                            <?php } else {
+                                            ?>
+                                                <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[flights_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
+
+                                            <?php
+                                            } ?>
+                                        </div>
+                                        <small style="text-align: left;" class="text-muted"><?php
+                                                                                            echo "$row[time_flight] - $row[price]$";
+                                                                                            ?></small>
+                                        <small style="text-align: left;" class="text-muted class-display-flex"><?php
+                                                                                                                echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]<br>
+                               </small><small style='text-align: left;' class='text-muted class-display-flex'>
+                               <i class='bi bi-airplane form-label-rotate-left margin-right-10'></i> Destination: $row[airport_b] </small>";
+                                                                                                                ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<?php }
                 }
             }
         }

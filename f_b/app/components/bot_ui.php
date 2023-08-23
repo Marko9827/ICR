@@ -21,7 +21,10 @@
         border: 1px #b52626 solid;
     }
 </style>
-<script>!(function () {
+<script>
+
+/*
+!(function () {
   let e = document.createElement("script"),
     t = document.head || document.getElementsByTagName("head")[0];
   (e.src =
@@ -40,4 +43,5 @@
     }),
     t.insertBefore(e, t.firstChild);
 })();
+*/
 </script>

@@ -268,23 +268,44 @@ var ICR = {
                     $(".checked_disabled_chk").attr("disabled", "true");
                 }
             },
-            ticket: function (id,what) {
+            ticket: function (id, what) {
                 var data = {};
-                if(what == "ticked_add"){
+                if (what == "ticked_add") {
                     data = {
-                        id:id,
-                        what:what,
-                        start_r:$("#departure_date").val(),
-                        start_end:$("#departure_date_Return").val()
+                        id: id,
+                        what: what,
+                        airport_a: $("#country.airport_a").val(),
+                        start_r: $("#departure_date").val(),
+                        start_end: $("#departure_date_Return").val()
                     };
                 }
+                if (what == "ticked_del") {
+                    data = {
+                        id: id,
+                        what: what
+                    }
+                }
+                if (what == "ticked_edit") {
+                    data = {
+                        id: id,
+                        what: what,
+                        airport_a: $("#country.airport_a").val(),
+                        start_r: $("#departure_date").val(),
+                        start_end: $("#departure_date_Return").val()
+                    };
+                }
+                // ticked_edit
                 $.ajax({
                     type: "POST",
                     url: "./?q=login_reg",
                     data: data,
                     success: function (res) {
                         if (res == "YES") {
-                            window.location.href = "./?p=Journal";
+                            if (what == "ticked_edit" || what == "ticked_del") {
+                                window.location.reload();
+                            } else  {
+                                window.location.href = "./?p=Journal";
+                            }
                         }
                     }
 
@@ -296,6 +317,8 @@ var ICR = {
                     ICR.country.forEach(function (h) {
                         v.innerHTML += `<option value="${h.name}">${h.name}</option>`;
                     });
+                    $(v).find(`option[value="${$(v).attr("data-selected")}"]`).attr("selected", "true");
+
                 });
             }
         },
