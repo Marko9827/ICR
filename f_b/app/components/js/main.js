@@ -163,6 +163,7 @@ var ICR = {
         { name: 'Montserrat', code: 'MS' },
         { name: 'Morocco', code: 'MA' },
         { name: 'Mozambique', code: 'MZ' },
+        { name: 'Montenegro', code: 'CS' },
         { name: 'Myanmar', code: 'MM' },
         { name: 'Namibia', code: 'NA' },
         { name: 'Nauru', code: 'NR' },
@@ -206,7 +207,7 @@ var ICR = {
         { name: 'Sao Tome and Principe', code: 'ST' },
         { name: 'Saudi Arabia', code: 'SA' },
         { name: 'Senegal', code: 'SN' },
-        { name: 'Serbia and Montenegro', code: 'CS' },
+        { name: 'Serbia', code: 'RS' },
         { name: 'Seychelles', code: 'SC' },
         { name: 'Sierra Leone', code: 'SL' },
         { name: 'Singapore', code: 'SG' },
@@ -258,14 +259,16 @@ var ICR = {
         { name: 'Zambia', code: 'ZM' },
         { name: 'Zimbabwe', code: 'ZW' }
     ],
-    ui: { 
-        checkout: function () {
-            document.querySelectorAll("#country").forEach(function (v) {
-                v.innerHTML = "<option selected value='Choose...'>Choose...</option>";
-                ICR.country.forEach(function (h) {
-                    v.innerHTML += `<option value="${h.name}">${h.name}</option>`;
+    ui: {
+        checkout: {
+            cr: function () {
+                document.querySelectorAll("#country").forEach(function (v) {
+                    v.innerHTML = "<option selected value='Choose...'>Choose...</option>";
+                    ICR.country.forEach(function (h) {
+                        v.innerHTML += `<option value="${h.name}">${h.name}</option>`;
+                    });
                 });
-            });
+            }
         },
         modal_close: function () {
             $(`.modal`).removeClass("show_active");

@@ -1,1 +1,1 @@
-<i class="bi bi-chat-dots"></i>
+<div class="bot_btn"><i class="bi bi-chat-dots"></i></div>

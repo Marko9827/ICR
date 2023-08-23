@@ -4,7 +4,7 @@
             <img src="<?php  echo $this->getimage($_GET['id']); ?>" alt="aer" class="background_image"/>
             <div class="py-5 text-center">
 
-                <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+                <p class="lead">Book a flight, some fields are filled in automatically from your profile. Of course you can change all the fields!</p>
             </div>
 
             <div class="row ">
@@ -117,7 +117,7 @@
         </main>
         <script>
     document.body.onload = function(){
-    ICR.ui.checkout(<?php echo $_GET['id']; ?>);
+    ICR.ui.checkout.cr(<?php echo $_GET['id']; ?>);
     }
 </script>
     <?php } else {
