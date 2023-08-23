@@ -18,17 +18,87 @@ class ICR
     {
     }
 
-    function RUN($r)
+    function RUN()
     {
-        if (!empty($r)) {
-            $this->pageloader($r);
+        if (!empty($_GET['q'])) {
+            if ($_GET['q'] == "login_reg") {
+                $this->login_reg_logout();
+            }
+        } else if (!empty($_GET['f'])) {
+            $path = __DIR__ . "/upload/$_GET[f]";
+            if (file_exists($path)) {
+                if (getimagesize($path)) {
+                    header("content-type: image/png");
+                    @readfile($path);
+                }
+            }
+
+            exit();
         } else {
-            $this->pageloader("home");
+            if (!empty($_GET['p'])) {
+                $this->pageloader($_GET['p']);
+            } else {
+                $this->pageloader("home");
+            }
         }
     }
-
+    function isLoged()
+    {
+        $r = false;
+        if (isset($_SESSION['user_id'])) {
+            $r = true;
+        }
+        return $r;
+    }
     function pginfo($f)
     {
+    }
+
+    function login_reg_logout()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            if ($_POST['what'] == "login") {
+                if (isset($_POST['email']) && isset($_POST['password'])) {
+                    $sql =  $this->Query("SELECT * FROM user WHERE email = '$_POST[email]'");
+                    if (mysqli_num_rows($sql) > 0) {
+                        while ($row = mysqli_fetch_assoc(($sql))) {
+                            if ($_POST['password'] == $row['password']) {
+                                session_regenerate_id();
+
+                                $_SESSION['user_id'] = $row['id'];
+                            }
+                        }
+                        echo "YES";
+                    }
+                } else {
+                    echo    "error";
+                }
+            } else if ($_POST['what'] == "logout") {
+                session_destroy();
+                echo "YES";
+            } else if ($_POST['what'] == "reg") {
+                if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])) {
+                    $id = time() * rand(0, 999999);
+                    $sql = $this->Query("INSERT INTO  `user` 
+                (`id`, `username`, `email`, `password`, `adress`, `phone`, `plane_best`, `login_history`, `admin`) VALUES 
+                ('$id', 
+                '$_POST[username]', 
+                '$_POST[email]', 
+                '$_POST[password]', 
+                '$_POST[address]', 
+                '$_POST[phone]', 
+                '0', '0', '0');");
+                    if (mysqli_num_rows($sql) > 0) {
+                        $_SESSION['user_id'] = $id;
+                        echo "YES";
+                    }
+                } else {
+                    echo "FILL ALL FIELDS";
+                }
+            } else {
+            }
+        }
     }
 
     function config()
@@ -51,7 +121,7 @@ class ICR
 
     function Query($query)
     {
-        
+
         $con = $this->config();
 
         try {
@@ -62,16 +132,15 @@ class ICR
                 return $exec;
             }
         } catch (Exception $e) {
- 
         }
         mysqli_close($con);
         return false;
     }
-    function getimage($id){
+    function getimage($id)
+    {
         $path = __DIR__ . "/upload/flight_$id.png";
 
         return "data:image/png;base64," . base64_encode(file_get_contents($path));
-
     }
     function flights_card($sql)
     {
@@ -83,10 +152,10 @@ class ICR
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
                         <img class="classimage_height card-img-top" data-src="<?php
-                        echo $this->getimage($row['flights_id']);
-                        ?>" src="<?php
-                        echo $this->getimage($row['flights_id']);
-                        ?>" alt="Card image cap">
+                                                                                echo $this->getimage($row['flights_id']);
+                                                                                ?>" src="<?php
+                                                                                            echo $this->getimage($row['flights_id']);
+                                                                                            ?>" alt="Card image cap">
                         <div class="card-body">
                             <p class="card-text"><?php echo $row['name']; ?></p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -128,4 +197,4 @@ class ICR
             include "$path";
         }
     }
-};
+}

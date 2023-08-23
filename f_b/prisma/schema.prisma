@@ -12,6 +12,7 @@ model user {
     admin         Int     @default(0) // Add flights to database
     date_time     String?
     username      String
+    surname       String
     email         String
     password      String?
     adress        String?
