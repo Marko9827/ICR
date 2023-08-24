@@ -409,7 +409,7 @@ if(isset($_POST["submit"])) {
     }
     function menu_active($page)
     {
-        $array = ["Home", "Journal", "Help"];
+        $array = ["Home", "Journal"];
         $r = '';
         foreach ($array as $val) {
             if ($page == $val) {
@@ -418,6 +418,8 @@ if(isset($_POST["submit"])) {
                 $r .= "<li><a href='./?p=$val' class='nav-link px-2  link-secondary  '>$val</a></li>";
             }
         }
+        $r .= "<li><a onclick='ICR.chat.o(this);' class='nav-link px-2  link-secondary  '>Help</a></li>";
+        
         return $r;
         /*
         <li><a href="./" class="nav-link px-2 link-secondary">Home</a></li>
