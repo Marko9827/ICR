@@ -96,8 +96,9 @@ class ICR
                 $ticked_d = $_POST['id'];
                 $time_start = $_POST['start_r'];
                 $time_end = $_POST['start_end'];
-                $sql = $this->Query("INSERT INTO `rezerved` (`rezerved_id`, `user_id`, `time`, `flight_id`, `time_end`, `time_start`, `airport_a`) VALUES 
-                ('$id', '$_SESSION[user_id]', '$time', '$ticked_d', '$time_start', '$time_end', '$_POST[airport_a]');");
+                $seats = $_POST['seats'];
+                $sql = $this->Query("INSERT INTO `rezerved` (`seats`,`rezerved_id`, `user_id`, `time`, `flight_id`, `time_end`, `time_start`, `airport_a`) VALUES 
+                ('$seats', '$id', '$_SESSION[user_id]', '$time', '$ticked_d', '$time_start', '$time_end', '$_POST[airport_a]');");
 
  
                 if ($sql) {
@@ -114,9 +115,10 @@ class ICR
                 $ticked_d = $_POST['id'];
                 $time_start = $_POST['start_r'];
                 $time_end = $_POST['start_end'];
+                $seats = $_POST['seats'];
                 // UPDATE `icr`.`rezerved` SET `time_end` = '2023-08-25', `time_start` = '2023-08-30', `airport_a` = '235a' WHERE (`rezerved_id` = '843027248400');
 
-                $sql = $this->Query("UPDATE `rezerved` SET `time_end` = '$time_end', `time_start` = '$time_start', `airport_a` = '$_POST[airport_a]' WHERE (`rezerved_id` = '$ticked_d');");
+                $sql = $this->Query("UPDATE `rezerved` SET `seats` = '$seats' , `time_end` = '$time_end', `time_start` = '$time_start', `airport_a` = '$_POST[airport_a]' WHERE (`rezerved_id` = '$ticked_d');");
 
                 if ($sql) {
                     echo "YES";

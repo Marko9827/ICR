@@ -20,9 +20,9 @@
 
                                 <div class="col-md-3">
                                     <label for="country" class="form-label"><i class="bi bi-airplane rotate-90 margin-right-10"></i> From the</label>
-                                    <select class="form-select airport_a" data-selected="<?php 
-                                    echo $row2["airport_a"];
-                                    ?>" id="country" required>
+                                    <select class="form-select airport_a" data-selected="<?php
+                                                                                            echo $row2["airport_a"];
+                                                                                            ?>" id="country" required>
                                         <option value="">Choose...</option>
                                         <option>United States</option>
                                     </select>
@@ -57,6 +57,19 @@
                                     </div>
                                 </div>
 
+                                <div class="col-md-3">
+                                    <label for="seats" class="form-label"><i class="bi bi-person margin-right-10"></i> Seats</label>
+                                    <select class="form-select seats_tempator" id="seats" data-selected="<?php
+                                                                                                            echo $row2["seats"];
+                                                                                                            ?>" required>
+                                        <option value="" selected><?php echo $this->cuva_idf("seats", $_GET['id']); ?></option>
+
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please provide 1 or more seat/s.
+                                    </div>
+                                </div>
+
                             </div>
 
                             <hr class="my-4">
@@ -86,7 +99,7 @@
                 }
             </script>
         <?php } else {
-               echo "    <script> window.location.href = '/?p=checkout&id=$_GET[id]'; </script>";
+        echo "    <script> window.location.href = '/?p=checkout&id=$_GET[id]'; </script>";
     }
 } else {
         ?>

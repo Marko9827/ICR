@@ -55,7 +55,15 @@
                                     Please provide Date of Return
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                    <label for="seats" class="form-label"><i class="bi bi-person margin-right-10"></i> Seats</label>
+                                    <select class="form-select seats_tempator" id="seats" data-selected="0" required>
 
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please provide 1 or more seat/s.
+                                    </div>
+                                </div>
                         </div>
 
                         <hr class="my-4">

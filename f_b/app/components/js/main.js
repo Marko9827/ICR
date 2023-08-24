@@ -276,7 +276,8 @@ var ICR = {
                         what: what,
                         airport_a: $("#country.airport_a").val(),
                         start_r: $("#departure_date").val(),
-                        start_end: $("#departure_date_Return").val()
+                        start_end: $("#departure_date_Return").val(),
+                        seats:$("#seats").val()
                     };
                 }
                 if (what == "ticked_del") {
@@ -320,6 +321,12 @@ var ICR = {
                     $(v).find(`option[value="${$(v).attr("data-selected")}"]`).attr("selected", "true");
 
                 });
+                $("#seats").html("");
+              for(var i = 0; i < 10; i++){
+                $("#seats").append(`<option value="${i}">${i}</option>`);
+              }
+              $("#seats").find(`option[value="${$("#seats").attr("data-selected")}"]`).attr("selected", "true");
+
             }
         },
         modal_close: function () {
@@ -362,11 +369,22 @@ var ICR = {
             data = {
                 what: w,
                 username: $(".modal#reg_modal #inputUsername").val(),
-                 surname: $(".modal#reg_modal #inputSurname").val(),
-                   email: $(".modal#reg_modal #inputEmail").val(),
+                surname: $(".modal#reg_modal #inputSurname").val(),
+                email: $(".modal#reg_modal #inputEmail").val(),
                 password: $(".modal#reg_modal #inputPassword").val(),
-                 address: $(".modal#reg_modal #inputAdresse").val(),
-                   phone: $(".modal#reg_modal #inputPhone").val()
+                address: $(".modal#reg_modal #inputAdresse").val(),
+                phone: $(".modal#reg_modal #inputPhone").val()
+            };
+        }
+        if (w == "edit_profile") {
+            data = {
+                what: w,
+                username: $(".modal#reg_modal #inputUsername").val(),
+                surname: $(".modal#reg_modal #inputSurname").val(),
+                email: $(".modal#reg_modal #inputEmail").val(),
+                password: $(".modal#reg_modal #inputPassword").val(),
+                address: $(".modal#reg_modal #inputAdresse").val(),
+                phone: $(".modal#reg_modal #inputPhone").val()
             };
         }
         console.log(data);
@@ -391,6 +409,7 @@ var ICR = {
         }
     },
     start: function () {
+        document.body.ondragstart = () => { return false;};
         document.body.oncontextmenu = () => { return false; };
     }
 }

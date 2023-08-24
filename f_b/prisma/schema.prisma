@@ -34,6 +34,15 @@ model rezerved {
     @@map(name: "rezerved")
 }
 
+model comments {
+    comm_id   BigInt @id
+    flight_id BigInt
+    time      BigInt
+    text      String
+
+    @@map(name: "comments")
+}
+
 model flights {
     flights_id    BigInt @id
     name          String
@@ -45,10 +54,12 @@ model flights {
     image         String
     class_flights String
     price         BigInt
+    stars         Int
     time_flight   String
     reactions     Int // Recentzije
     type_class    Int    @default(0)
     status        Int    @default(0)
+    seats         Int    @default(0)
 
     @@map(name: "flights")
 }
@@ -66,6 +77,7 @@ model Journal {
     price         BigInt
     time_flight   String
     reactions     Int // Recentzije
+    seats         Int    @default(0)
 
     @@map(name: "Journal")
 }

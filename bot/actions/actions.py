@@ -32,7 +32,7 @@ class ActionCarousel(Action):
                         "title": "Russia - Ticket",
                         "subtitle": "Price: $900",
                         "image_url": "http://localhost:3001/?f=flight_0.png",
-                       "buttons": [
+                        "buttons": [
                             {
                                 "title": "Details", #details -> kao dugme
                                 "url": "/?p=ticket&id=1",
@@ -41,7 +41,26 @@ class ActionCarousel(Action):
                             {
                                 "title": "Buy ticket", #Dugme -> Buy now
                                 "url": "postback",
-                                "payload": "/buynowarticle", #nlu.yml
+                                "payload": "/buynowticket", #nlu.yml
+                                "url": "/?p=checkout&id=0",
+                                "type": "web_url"
+                            } 
+                        ]
+                    },
+                     {
+                        "title": "Egypt - Ticket",
+                        "subtitle": "Price: $1500",
+                        "image_url": "http://localhost:3001/?f=flight_1.png",
+                        "buttons": [
+                            {
+                                "title": "Details", #details -> kao dugme
+                                "url": "/?p=ticket&id=1",
+                                "type": "web_url"
+                            },
+                            {
+                                "title": "Buy ticket", #Dugme -> Buy now
+                                "url": "postback",
+                                "payload": "/buynowticket", #nlu.yml
                                 "url": "/?p=checkout&id=1",
                                 "type": "web_url"
                             } 
@@ -53,6 +72,6 @@ class ActionCarousel(Action):
 
         }
 
-        dispatcher.utter_message(text="Here are some of our brand shoes!", attachment=new_carousel)
+        dispatcher.utter_message(text="Here are some of our locations to visit!", attachment=new_carousel)
 
         return []

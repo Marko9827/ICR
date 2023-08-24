@@ -1,4 +1,4 @@
-version: "3.2"
+version: "3.1"
 
 stories:
 
@@ -9,15 +9,15 @@ stories:
   - intent: mood_great
   - action: utter_happy
 
+#prica kupaca
 - story: the script
   steps: 
   - intent: greet
   - action: utter_greet
-  - intent: planecartds 
-  - action: actions_list 
-  - intent: buynowarticle 
-  - action: utter_buynowarticle 
-
+  - intent: product_list #I want to buy new shoes
+  - action: actions_list #actions.py... kod u akcijama
+  - intent: buynowticket #buy now
+  - action: utter_buynowticket #za poruzbine > posetiti sajt
 
 - story: sad path 1
   steps:

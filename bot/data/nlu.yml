@@ -1,9 +1,6 @@
 version: "3.1"
 
 nlu:
-- intent: ticket
-  examples: |
-    - 3
 - intent: greet
   examples: |
     - hey
@@ -19,6 +16,21 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
+
+#pitanja korisnika
+- intent: product_list
+  examples: |
+    - Buy new shoes
+    - I want to buy new shoes
+    - buy new shoes
+    - I want to buy shoes
+
+#kupi odmah / sada
+- intent: buynowticket
+  examples: |
+    - Buy it
+    - Buy
+    - Buy now
 
 - intent: goodbye
   examples: |

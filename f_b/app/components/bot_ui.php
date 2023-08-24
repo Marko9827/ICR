@@ -1,25 +1,25 @@
 <div class="bot_btn"><i class="bi bi-chat-dots"></i></div>
 <style>
-  .rw-conversation-container .rw-header {
-    background-color: hsl(307, 71%, 27%);
-  }
+    .rw-conversation-container .rw-header {
+      background-color: hsl(307, 71%, 27%);
+    }
 
-  .rw-conversation-container .rw-messages-container .rw-message .rw-client {
-    background-color: hsl(0, 62%, 29%);
-  }
+    .rw-conversation-container .rw-messages-container .rw-message .rw-client {
+      background-color: hsl(0, 62%, 29%);
+    }
 
-  .rw-conversation-container .rw-messages-container .rw-message .rw-client .rw-message-text {
-    color: hsla(55, 100%, 63%, 0.862);
-  }
+    .rw-conversation-container .rw-messages-container .rw-message .rw-client .rw-message-text{
+      color: hsla(55, 100%, 63%, 0.862);
+    }
 
-  .rw-launcher {
-    background-color: #b52626;
-  }
+    .rw-launcher {
+      background-color: #b52626;
+    }
 
-  .rw-conversation-container .rw-reply {
-    background-color: #b52626;
-    border: 1px #b52626 solid;
-  }
+    .rw-conversation-container .rw-reply {
+      background-color: #b52626;
+      border: 1px #b52626 solid;
+    }
 </style>
 <script>
   !(function() {
@@ -37,8 +37,9 @@
             language: "en"
           },
           socketUrl: "http://localhost:5005",
-          showMessageDate: true,
-          inputTextFieldHint: 'What is in your mind..?'
+          showFullScreenButton: true,
+                showMessageDate: true,
+                inputTextFieldHint: 'What is in your mind..?'
         },
         null
       );
