@@ -1,11 +1,11 @@
 <?php if ($this->isLoged()) {
-    $sql2 = $this->Query("SELECT * FROM rezerved WHERE rezerved.flight_id = $_GET[id] AND rezerved.user_id = $_SESSION[user_id]");
+    $sql2 = $this->Query("SELECT * FROM rezerved WHERE rezerved.rezerved_id = $_GET[id] AND rezerved.user_id = $_SESSION[user_id]");
     if (mysqli_num_rows($sql2) > 0) {
         $row2 = mysqli_fetch_assoc($sql2);
 ?>
         <div class="container ">
             <main>
-                <img src="<?php echo $this->getimage($_GET['id']); ?>" alt="aer" class="background_image" />
+                <img src="<?php echo $this->getimage($row2['flight_id']); ?>" alt="aer" class="background_image" />
                 <div class="py-5 text-center">
 
                     <p class="lead">Edit your ticket</p>
@@ -34,7 +34,7 @@
                                 <div class="col-md-3">
                                     <label for="state" class="form-label"><i class="bi bi-geo-alt-fill margin-right-10"></i> Destination</label>
                                     <select disabled class="form-select" id="state" required>
-                                        <option value="" val selected><?php echo $this->cuva_idf("airport_b", $_GET['id']); ?></option>
+                                        <option value="" val selected><?php echo $this->cuva_idf("name", $row2['flight_id']); ?></option>
 
                                     </select>
                                     <div class="invalid-feedback">
@@ -77,7 +77,7 @@
 
                             <div class="form-check">
                                 <input onchange="ICR.ui.checkout.chk(this);" type="checkbox" class="form-check-input " id="save-info">
-                                <label class="form-check-label" for="save-info">Confirm modification or deletion</label>
+                                <label class="form-check-label" for="save-info">Confirm modification or cancel</label>
                             </div>
 
 
@@ -87,7 +87,7 @@
                             <div class="row g-3">
 
                                 <button onclick="ICR.ui.checkout.ticket(<?php echo $row2['rezerved_id']; ?>,'ticked_edit');" class="btn_twos col-md-3 w-100 btn btn-primary btn-lg checked_disabled_chk" disabled type="button"><i class="bi bi-airplane"></i> Save</button>
-                                <button onclick="ICR.ui.checkout.ticket(<?php echo $row2['rezerved_id']; ?>,'ticked_del');" class="btn_twos col-md-3 w-100 btn btn-danger btn-lg checked_disabled_chk" disabled type="button"><i class="bi bi-trash"></i> Delete</button>
+                                <button onclick="ICR.ui.checkout.ticket(<?php echo $row2['rezerved_id']; ?>,'ticked_del');" class="btn_twos col-md-3 w-100 btn btn-danger btn-lg checked_disabled_chk" disabled type="button"><i class="bi bi-trash"></i> Cancel</button>
                             </div>
                         </form>
                     </div>
@@ -99,7 +99,7 @@
                 }
             </script>
         <?php } else {
-        echo "    <script> window.location.href = '/?p=checkout&id=$_GET[id]'; </script>";
+      
     }
 } else {
         ?>

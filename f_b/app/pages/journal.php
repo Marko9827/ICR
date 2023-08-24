@@ -7,7 +7,7 @@
 
             <div class="row">
                 <?php
-                $this->flights_card_fullinfo("SELECT * FROM flights   ORDER BY  flights.flights_id");
+                $this->flights_card_f("SELECT * FROM rezerved WHERE rezerved.user_id = $_SESSION[user_id]  ORDER BY  rezerved.time ASC");
                 ?>
             </div>
         </div>

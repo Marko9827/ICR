@@ -79,7 +79,7 @@ CREATE TABLE `flights` (
 
 LOCK TABLES `flights` WRITE;
 /*!40000 ALTER TABLE `flights` DISABLE KEYS */;
-INSERT INTO `flights` VALUES (0,'Russia','Belgrade','Moskow','Serbia Airport','Russia Airport','Best food in the plane','all','A',900,'14/12/2023',0,0,0,0,0),(1,'Egypt','Belgrade','Giza','Serbia Airport','Egypt Airport','Best destination for your wakation','all','B',1500,'03/02/2023',0,0,0,0,0);
+INSERT INTO `flights` VALUES (0,'Russia','Belgrade','Moskow','Serbia Airport','Russia Airport','Best food in the plane','all','A',900,'14/12/2023',0,0,0,0,0),(1,'Egypt','Belgrade','Giza','Serbia Airport','Egypt Airport','Best destination for your wakation','all','B',1500,'03/02/2023',0,0,0,0,0),(2,'France','Belgrade','Paris','Serbia Airport','Paris Airport','aaear','al','B',100,'15/09/2024',0,0,0,0,0);
 /*!40000 ALTER TABLE `flights` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,6 +124,7 @@ CREATE TABLE `rezerved` (
   `airport_a` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `airport_b` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `seats` int DEFAULT '0',
+  `status` int DEFAULT '0',
   PRIMARY KEY (`rezerved_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -134,7 +135,7 @@ CREATE TABLE `rezerved` (
 
 LOCK TABLES `rezerved` WRITE;
 /*!40000 ALTER TABLE `rezerved` DISABLE KEYS */;
-INSERT INTO `rezerved` VALUES (253924299300,116534295215520,1692828662,0,'2023-08-25','2023-08-28','Argentina',NULL,1),(763465762642,0,1692828742,1,'2023-08-25','2023-08-27','Honduras',NULL,2);
+INSERT INTO `rezerved` VALUES (253924299300,116534295215520,1692828662,0,'2023-08-25','2023-08-28','Argentina',NULL,1,0),(763465762642,0,1692828742,1,'2023-08-25','2023-08-27','Honduras',NULL,2,0),(1339077977783,0,1692892513,2,'2023-08-25','2023-08-28','Saint Lucia',NULL,5,0),(1642112354950,0,1692899335,1,'2023-08-29','2023-09-20','Angola',NULL,9,0);
 /*!40000 ALTER TABLE `rezerved` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,4 +184,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-24 17:17:31
+-- Dump completed on 2023-08-24 20:20:53

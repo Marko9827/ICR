@@ -90,11 +90,12 @@
                 ICR.ui.checkout.cr(<?php echo $_GET['id']; ?>);
             }
             <?php 
-            
+         
+         /*
     if (mysqli_num_rows($this->Query("SELECT * FROM rezerved WHERE flight_id = $_GET[id] AND user_id = $_SESSION[user_id]")) > 0) {
         echo "window.location.href = '/?p=ticket&what=edit&id=$_GET[id]';";
     }
-            ?>
+       */     ?>
         </script>
     <?php } else {
     ?>
