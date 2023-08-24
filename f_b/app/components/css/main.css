@@ -200,7 +200,15 @@ img.background_image {
 footer {
   padding: 10px;
 }
+.card-body div.d-flex {
+  display: grid !important;
+  text-align: center;
+}
 
+
+.card-body div.d-flex small {
+  padding-top: 10px;
+}
 @media (min-width: 768px) {
 
   .card-body div.d-flex {
@@ -363,14 +371,22 @@ button.rw-launcher {
 
 .bot_btn.active {
   opacity: 1;
-}.rw-widget-container.rw-full-screen.rw-chat-open {
-  margin: 0px !important;
-}.rw-conversation-container .rw-header,
-.rw-conversation-container .rw-reply,
-.rw-conversation-container .rw-messages-container .rw-message .rw-client{
-    background-color: #0d6efd !important;
 }
- 
+
+.rw-widget-container.rw-full-screen.rw-chat-open {
+  margin: 0px !important;
+}
+
+.rw-conversation-container .rw-header,
+.rw-conversation-container .rw-reply,
+.rw-conversation-container .rw-messages-container .rw-message .rw-client {
+  background-color: #0d6efd !important;
+}
+
 .rw-conversation-container .rw-response {
-    border: 2px solid #0d6efd !important;
+  border: 2px solid #0d6efd !important;
+}
+
+rezerved[data-ui="1"] {
+  background: #d00303;
 }
