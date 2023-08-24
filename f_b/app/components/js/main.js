@@ -348,7 +348,19 @@ var ICR = {
 
                     $(str).addClass("show_active");
                     if (what == "class_review_title") {
-
+                         $.ajax({
+                            type: "POST",
+                            url: "./?q=login_reg",
+                            data: {
+                                what: what,
+                                hmm:"get_all",
+                                id: id
+                            },
+                            success: function (res) {
+                               $("section.modal-body").html(res);
+                            }
+                
+                        });
                     }
                 }
 
