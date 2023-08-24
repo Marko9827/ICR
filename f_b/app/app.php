@@ -105,7 +105,7 @@ class ICR
                     echo "YES";
                 }
             } else if ($_POST['what'] == "ticked_del") {
-                $sql = $this->Query("DELETE FROM `rezerved` WHERE (`rezerved_id` = '$_POST[id]')");
+                 $sql = $this->Query("UPDATE `icr`.`rezerved` SET `status` = '1' WHERE (`rezerved_id` = '$_POST[id]');");
                 if ($sql) {
                     echo "YES";
                 }

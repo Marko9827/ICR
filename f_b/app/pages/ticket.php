@@ -7,8 +7,24 @@
             <main>
                 <img src="<?php echo $this->getimage($row2['flight_id']); ?>" alt="aer" class="background_image" />
                 <div class="py-5 text-center">
+<?php 
+if($row2['flight_id'] == 1){
 
-                    <p class="lead">Edit your ticket</p>
+    
+echo '          <p class="lead">Your ticket is canceled.</p> 
+
+<div class="row">';
+
+$this->flights_card_f("SELECT * FROM rezerved WHERE rezerved.rezerved_id = $_GET[id] AND rezerved.user_id = $_SESSION[user_id]  ORDER BY  rezerved.time ASC");
+
+echo '</div>';
+}else{
+echo '          <p class="lead">Edit your ticket</p>';
+ 
+
+
+?>
+           
                 </div>
 
                 <div class="row ">
@@ -71,7 +87,7 @@
                                 </div>
 
                             </div>
-
+ 
                             <hr class="my-4">
 
 
@@ -89,8 +105,9 @@
                                 <button onclick="ICR.ui.checkout.ticket(<?php echo $row2['rezerved_id']; ?>,'ticked_edit');" class="btn_twos col-md-3 w-100 btn btn-primary btn-lg checked_disabled_chk" disabled type="button"><i class="bi bi-airplane"></i> Save</button>
                                 <button onclick="ICR.ui.checkout.ticket(<?php echo $row2['rezerved_id']; ?>,'ticked_del');" class="btn_twos col-md-3 w-100 btn btn-danger btn-lg checked_disabled_chk" disabled type="button"><i class="bi bi-trash"></i> Cancel</button>
                             </div>
+ 
                         </form>
-                    </div>
+                    </div><?php } ?>
                 </div>
             </main>
             <script>

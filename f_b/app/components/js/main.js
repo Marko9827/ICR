@@ -292,7 +292,9 @@ var ICR = {
                         what: what,
                         airport_a: $("#country.airport_a").val(),
                         start_r: $("#departure_date").val(),
-                        start_end: $("#departure_date_Return").val()
+                        start_end: $("#departure_date_Return").val(),
+                        seats: $("#seats").val()
+
                     };
                 }
                 // ticked_edit
