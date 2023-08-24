@@ -66,8 +66,9 @@ class ICR
     function pginfo($f)
     {
     }
-    function recentison_and_comment_loader(){
-        
+    function recentison_and_comment_loader($fa)
+    {
+        $this->include("components/comments.php");
     }
 
     function login_reg_logout()
@@ -112,13 +113,17 @@ class ICR
                 if ($sql) {
                     echo "YES";
                 }
-            } else if ($_POST['what'] == "ticked_comm_add") {
-
-                $id = time() * rand(0, 999);
-                $time = time();
-                $sql = $this->Query("INSERT INTO `comments` 
+            } else if ($_POST['what'] == "class_review_title") {
+                if ($_POST['hmm'] == "get_all") {
+                    $this->recentison_and_comment_loader("$_POST[id]");
+                }
+                if ($_POST['hmm'] == "new") {
+                    $id = time() * rand(0, 999);
+                    $time = time();
+                    $sql = $this->Query("INSERT INTO `comments` 
                 (`idcomments`, `text`, `user_id`, `post_id`, `time`) VALUES 
                 ('$id', '$_POST[msg]', '$_SESSION[user_id]', '$_POST[id]','$time');");
+                }
                 if ($sql) {
                     echo "YES";
                 }
@@ -291,8 +296,8 @@ class ICR
                         <img class="classimage_height card-img-top" data-src="<?php
                                                                                 echo $this->getimage($row['flight_id']);
                                                                                 ?>" src="<?php
-                                                                                        echo $this->getimage($row['flight_id']);
-                                                                                        ?>" alt="Card image cap">
+                                                                                            echo $this->getimage($row['flight_id']);
+                                                                                            ?>" alt="Card image cap">
                         <div class="card-body">
                             <p class="card-text"><?php echo $row['name']; ?></p>
                             <div class="card_body_grid d-flex justify-content-between align-items-center">
@@ -304,7 +309,7 @@ class ICR
                                         <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[rezerved_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
                                     <?php }
                                     if ($row['status'] == 2) {
-                                        echo '<a type="button" class="btn btn-sm btn-outline-secondary" onclick="ICR.ui.modal(\'class_review_title\','.$row["rezerved_id"].')" ><i class="bi bi-chat-left-dots margin-right-10"></i> Reviews | <i class="bi bi-star-half margin-right-10"></i> Score: 3</a>';
+                                        echo '<a type="button" class="btn btn-sm btn-outline-secondary" onclick="ICR.ui.modal(\'class_review_title\',' . $row["rezerved_id"] . ')" ><i class="bi bi-chat-left-dots margin-right-10"></i> Reviews | <i class="bi bi-star-half margin-right-10"></i> Score: 3</a>';
                                     }
                                     ?>
                                 </div>

@@ -347,7 +347,7 @@ var ICR = {
                     $(`.modal`).removeClass("show_active");
 
                     $(str).addClass("show_active");
-                    if (what == "comment_review") {
+                    if (what == "class_review_title") {
 
                     }
                 }

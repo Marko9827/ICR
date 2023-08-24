@@ -407,3 +407,9 @@ rezerved .drf_flex {
   width: 30px;
   height: 30px !important;
 }
+
+section.modal-body {
+  background: transparent;
+  max-height: 70vh !important;
+  overflow: auto;
+}
