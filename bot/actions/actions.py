@@ -35,7 +35,7 @@ class ActionCarousel(Action):
                         "buttons": [
                             {
                                 "title": "Details", #details -> kao dugme
-                                "url": "/?p=ticket&id=1",
+                                "url": "/?p=flight&id=1",
                                 "type": "web_url"
                             },
                             {
@@ -54,7 +54,7 @@ class ActionCarousel(Action):
                         "buttons": [
                             {
                                 "title": "Details", #details -> kao dugme
-                                "url": "/?p=ticket&id=1",
+                                "url": "/?p=flight&id=1",
                                 "type": "web_url"
                             },
                             {
@@ -62,6 +62,25 @@ class ActionCarousel(Action):
                                 "url": "postback",
                                 "payload": "/buynowticket", #nlu.yml
                                 "url": "/?p=checkout&id=1",
+                                "type": "web_url"
+                            } 
+                        ]
+                    },
+                     {
+                        "title": "Pariz - Ticket",
+                        "subtitle": "Price: $100 - 800",
+                        "image_url": "http://localhost:3001/?f=flight_2.png",
+                        "buttons": [
+                            {
+                                "title": "Details", #details -> kao dugme
+                                "url": "/?p=flight&id=2",
+                                "type": "web_url"
+                            },
+                            {
+                                "title": "Buy ticket", #Dugme -> Buy now
+                                "url": "postback",
+                                "payload": "/buynowticket", #nlu.yml
+                                "url": "/?p=checkout&id=2",
                                 "type": "web_url"
                             } 
                         ]

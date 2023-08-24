@@ -277,7 +277,7 @@ var ICR = {
                         airport_a: $("#country.airport_a").val(),
                         start_r: $("#departure_date").val(),
                         start_end: $("#departure_date_Return").val(),
-                        seats:$("#seats").val()
+                        seats: $("#seats").val()
                     };
                 }
                 if (what == "ticked_del") {
@@ -322,10 +322,10 @@ var ICR = {
 
                 });
                 $("#seats").html("");
-              for(var i = 0; i < 10; i++){
-                $("#seats").append(`<option value="${i}">${i}</option>`);
-              }
-              $("#seats").find(`option[value="${$("#seats").attr("data-selected")}"]`).attr("selected", "true");
+                for (var i = 0; i < 10; i++) {
+                    $("#seats").append(`<option value="${i}">${i}</option>`);
+                }
+                $("#seats").find(`option[value="${$("#seats").attr("data-selected")}"]`).attr("selected", "true");
 
             }
         },
@@ -408,8 +408,26 @@ var ICR = {
             eval(`${R}`)
         }
     },
+    chat: {
+        o: function (t) {
+            $("button.rw-launcher").click();
+            return "";
+            if ($(t).hasClass("active")) {
+                $(t).removeClass("active");
+                $(".rw-widget-container").removeClass("rw-chat-open");
+                $(".rw-widget-container .rw-conversation-container").remove();
+
+            } else {
+                $(t).addClass("active");
+              //  $(".rw-widget-container").addClass("rw-chat-open");
+                $("button.rw-launcher").click();
+
+
+            }
+        }
+    },
     start: function () {
-        document.body.ondragstart = () => { return false;};
+        document.body.ondragstart = () => { return false; };
         document.body.oncontextmenu = () => { return false; };
     }
 }

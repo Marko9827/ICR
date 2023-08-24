@@ -307,7 +307,7 @@ small.text-muted.class-display-flex {
 .bot_btn:hover {
   opacity: 1;
 }
- 
+
 
 @media (max-width: 608px) {
   .container[data-type="journal_all"] .card-body .card_body_grid {
@@ -329,8 +329,8 @@ small.text-muted.class-display-flex {
 
 }
 
- .card-body .card_body_grid a,
- .card-body .card_body_grid button {
+.card-body .card_body_grid a,
+.card-body .card_body_grid button {
   height: 35px;
 }
 
@@ -341,5 +341,36 @@ small.text-muted.class-display-flex {
 
 
 button[type="button"] {
-  height: fit-content !important; 
+  height: fit-content !important;
+}
+
+
+
+.rw-widget-container {
+  margin: 0 20px 65px 0 !important;
+}
+
+button.rw-launcher {
+  opacity: 0 !important;
+  display: none !important;
+}
+
+.bot_btn {
+  bottom: 15px;
+  right: 15px;
+  z-index: 3333333;
+}
+
+.bot_btn.active {
+  opacity: 1;
+}.rw-widget-container.rw-full-screen.rw-chat-open {
+  margin: 0px !important;
+}.rw-conversation-container .rw-header,
+.rw-conversation-container .rw-reply,
+.rw-conversation-container .rw-messages-container .rw-message .rw-client{
+    background-color: #0d6efd !important;
+}
+ 
+.rw-conversation-container .rw-response {
+    border: 2px solid #0d6efd !important;
 }
