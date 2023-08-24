@@ -276,7 +276,7 @@ if(isset($_POST["submit"])) {
                                     <p class="card-text"><?php echo $row['name']; ?></p>
                                     <div class="card_body_grid d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button>
+                                        <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=flight&id=$row[flights_id]"; ?>">Info</a>
                                             <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[flights_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
                                         </div>
                                         <small style="text-align: left;" class="text-muted"><?php
@@ -336,7 +336,7 @@ if(isset($_POST["submit"])) {
                                     <p class="card-text"><?php echo $row['name']; ?></p>
                                     <div class="card_body_grid d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Flights</button>
+                                        <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=flight&id=$row[flights_id]"; ?>">Info</a>
                                             <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[flights_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
                                         </div>
                                         <small style="text-align: left;" class="text-muted"><?php
