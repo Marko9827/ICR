@@ -67,7 +67,7 @@ class ActionCarousel(Action):
                         ]
                     },
                      {
-                        "title": "Pariz - Ticket",
+                        "title": "Paris - Ticket",
                         "subtitle": "Price: $100 - 800",
                         "image_url": "http://localhost:3001/?f=flight_2.png",
                         "buttons": [

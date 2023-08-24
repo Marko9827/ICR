@@ -100,7 +100,7 @@ class ICR
                 $sql = $this->Query("INSERT INTO `rezerved` (`seats`,`rezerved_id`, `user_id`, `time`, `flight_id`, `time_end`, `time_start`, `airport_a`) VALUES 
                 ('$seats', '$id', '$_SESSION[user_id]', '$time', '$ticked_d', '$time_start', '$time_end', '$_POST[airport_a]');");
 
- 
+
                 if ($sql) {
                     echo "YES";
                 }
@@ -148,22 +148,23 @@ class ICR
             }
         }
     }
-    function uploadFile($name,$FILE){
+    function uploadFile($name, $FILE)
+    {
         $target_dir = "uploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-  if($check !== false) {
-    echo "File is an image - " . $check["mime"] . ".";
-    $uploadOk = 1;
-  } else {
-    echo "File is not an image.";
-    $uploadOk = 0;
-  }
-}
+        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        // Check if image file is a actual image or fake image
+        if (isset($_POST["submit"])) {
+            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+            if ($check !== false) {
+                echo "File is an image - " . $check["mime"] . ".";
+                $uploadOk = 1;
+            } else {
+                echo "File is not an image.";
+                $uploadOk = 0;
+            }
+        }
     }
 
     function config()
@@ -276,7 +277,7 @@ if(isset($_POST["submit"])) {
                                     <p class="card-text"><?php echo $row['name']; ?></p>
                                     <div class="card_body_grid d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                        <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=flight&id=$row[flights_id]"; ?>">Info</a>
+                                            <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=flight&id=$row[flights_id]"; ?>">Info</a>
                                             <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[flights_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
                                         </div>
                                         <small style="text-align: left;" class="text-muted"><?php
@@ -336,7 +337,7 @@ if(isset($_POST["submit"])) {
                                     <p class="card-text"><?php echo $row['name']; ?></p>
                                     <div class="card_body_grid d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                        <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=flight&id=$row[flights_id]"; ?>">Info</a>
+                                            <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=flight&id=$row[flights_id]"; ?>">Info</a>
                                             <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[flights_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
                                         </div>
                                         <small style="text-align: left;" class="text-muted"><?php
@@ -419,7 +420,7 @@ if(isset($_POST["submit"])) {
             }
         }
         $r .= "<li><a onclick='ICR.chat.o(this);' class='nav-link px-2  link-secondary  '>Help</a></li>";
-        
+
         return $r;
         /*
         <li><a href="./" class="nav-link px-2 link-secondary">Home</a></li>
