@@ -23,6 +23,14 @@ model user {
     @@map(name: "user")
 }
 
+model comments {
+    idcomments BigInt  @id @unique
+    text       String
+    user_id    BigInt
+    time       BigInt
+    post_id    BigInt
+} 
+
 model rezerved {
     rezerved_id BigInt @id
     user_id     BigInt
@@ -33,15 +41,7 @@ model rezerved {
 
     @@map(name: "rezerved")
 }
-
-model comments {
-    comm_id   BigInt @id
-    flight_id BigInt
-    time      BigInt
-    text      String
-
-    @@map(name: "comments")
-}
+ 
 
 model flights {
     flights_id    BigInt @id

@@ -200,6 +200,7 @@ img.background_image {
 footer {
   padding: 10px;
 }
+
 .card-body div.d-flex {
   display: grid !important;
   text-align: center;
@@ -209,6 +210,7 @@ footer {
 .card-body div.d-flex small {
   padding-top: 10px;
 }
+
 @media (min-width: 768px) {
 
   .card-body div.d-flex {
@@ -389,4 +391,19 @@ button.rw-launcher {
 
 rezerved[data-ui="1"] {
   background: #d00303;
+}
+
+rezerved[data-ui="0"] {
+  background: rebeccapurple;
+}
+
+rezerved .drf_flex {
+  display: flex;
+}
+
+.modal-content button.close {
+  border: 0px;
+  border-radius: 3px;
+  width: 30px;
+  height: 30px !important;
 }

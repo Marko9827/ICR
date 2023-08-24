@@ -334,10 +334,11 @@ var ICR = {
         modal_close: function () {
             $(`.modal`).removeClass("show_active");
         },
-        modal: function (what) {
+        modal: function (what, id = 0) {
             if (what == "CLOSE") {
                 $(`.modal`).removeClass("show_active");
             } else {
+
                 var str = `.modal[id="${what}"]`;
 
                 if ($(str).hasClass("show_active")) {
@@ -346,7 +347,9 @@ var ICR = {
                     $(`.modal`).removeClass("show_active");
 
                     $(str).addClass("show_active");
+                    if (what == "comment_review") {
 
+                    }
                 }
 
             }
@@ -368,6 +371,17 @@ var ICR = {
         }
 
         if (w == "reg") {
+            data = {
+                what: w,
+                username: $(".modal#reg_modal #inputUsername").val(),
+                surname: $(".modal#reg_modal #inputSurname").val(),
+                email: $(".modal#reg_modal #inputEmail").val(),
+                password: $(".modal#reg_modal #inputPassword").val(),
+                address: $(".modal#reg_modal #inputAdresse").val(),
+                phone: $(".modal#reg_modal #inputPhone").val()
+            };
+        }
+        if (w == "ticked_comm_add") {
             data = {
                 what: w,
                 username: $(".modal#reg_modal #inputUsername").val(),
@@ -421,7 +435,7 @@ var ICR = {
 
             } else {
                 $(t).addClass("active");
-              //  $(".rw-widget-container").addClass("rw-chat-open");
+                //  $(".rw-widget-container").addClass("rw-chat-open");
                 $("button.rw-launcher").click();
 
 

@@ -66,6 +66,9 @@ class ICR
     function pginfo($f)
     {
     }
+    function recentison_and_comment_loader(){
+        
+    }
 
     function login_reg_logout()
     {
@@ -105,7 +108,17 @@ class ICR
                     echo "YES";
                 }
             } else if ($_POST['what'] == "ticked_del") {
-                 $sql = $this->Query("UPDATE `icr`.`rezerved` SET `status` = '1' WHERE (`rezerved_id` = '$_POST[id]');");
+                $sql = $this->Query("UPDATE `icr`.`rezerved` SET `status` = '1' WHERE (`rezerved_id` = '$_POST[id]');");
+                if ($sql) {
+                    echo "YES";
+                }
+            } else if ($_POST['what'] == "ticked_comm_add") {
+
+                $id = time() * rand(0, 999);
+                $time = time();
+                $sql = $this->Query("INSERT INTO `comments` 
+                (`idcomments`, `text`, `user_id`, `post_id`, `time`) VALUES 
+                ('$id', '$_POST[msg]', '$_SESSION[user_id]', '$_POST[id]','$time');");
                 if ($sql) {
                     echo "YES";
                 }
@@ -220,23 +233,22 @@ class ICR
         if (mysqli_num_rows($sql) > 0) {
             $row = mysqli_fetch_assoc($sql);
             if ($row['status'] == 0) { //predstojeci coming son
-                echo '<rezerved data-ui="'.$row["status"].'">   
+                echo '<rezerved data-ui="' . $row["status"] . '">   
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512" style="
             fill: white !important;
             margin-right: 10px;
         "><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M381 114.9L186.1 41.8c-16.7-6.2-35.2-5.3-51.1 2.7L89.1 67.4C78 73 77.2 88.5 87.6 95.2l146.9 94.5L136 240 77.8 214.1c-8.7-3.9-18.8-3.7-27.3 .6L18.3 230.8c-9.3 4.7-11.8 16.8-5 24.7l73.1 85.3c6.1 7.1 15 11.2 24.3 11.2H248.4c5 0 9.9-1.2 14.3-3.4L535.6 212.2c46.5-23.3 82.5-63.3 100.8-112C645.9 75 627.2 48 600.2 48H542.8c-20.2 0-40.2 4.8-58.2 14L381 114.9zM0 480c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32s-14.3-32-32-32H32c-17.7 0-32 14.3-32 32z"></path></svg>You have already booked a ticket</rezerved>';
             }
             if ($row['status'] == 1) { //Canceled
-                echo '<rezerved data-ui="'.$row["status"].'">  <i style="
+                echo '<rezerved data-ui="' . $row["status"] . '">  <i style="
                 fill: white !important;
                 margin-right: 10px;" class="bi bi-trash"></i>Ticket canceled</rezerved>';
             }
             if ($row['status'] == 2) { // complete obaljvne
-                echo '<rezerved data-ui="'.$row["status"].'">  
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512" style="
-            fill: white !important;
-            margin-right: 10px;
-        "><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M381 114.9L186.1 41.8c-16.7-6.2-35.2-5.3-51.1 2.7L89.1 67.4C78 73 77.2 88.5 87.6 95.2l146.9 94.5L136 240 77.8 214.1c-8.7-3.9-18.8-3.7-27.3 .6L18.3 230.8c-9.3 4.7-11.8 16.8-5 24.7l73.1 85.3c6.1 7.1 15 11.2 24.3 11.2H248.4c5 0 9.9-1.2 14.3-3.4L535.6 212.2c46.5-23.3 82.5-63.3 100.8-112C645.9 75 627.2 48 600.2 48H542.8c-20.2 0-40.2 4.8-58.2 14L381 114.9zM0 480c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32s-14.3-32-32-32H32c-17.7 0-32 14.3-32 32z"></path></svg>You have already booked a ticket</rezerved>';
+                echo '<rezerved data-ui="' . $row["status"] . '">  
+               <i class="bi bi-check2-circle"  style="
+               fill: white !important;
+               margin-right: 10px;" ></i>The flight is done</rezerved>';
             }
         }
     }
@@ -266,37 +278,41 @@ class ICR
     {
         $sql2 = $this->Query($sql);
         if (mysqli_num_rows($sql2) > 0) {
-         while($row = mysqli_fetch_assoc($sql2)){
+            while ($row = mysqli_fetch_assoc($sql2)) {
 ?>
 
 
 
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <?php
-                    echo $this->ticked_complete("$row[rezerved_id]");
-                    ?>
-                    <img class="classimage_height card-img-top" data-src="<?php
-                                                                            echo $this->getimage($row['flight_id']);
-                                                                            ?>" src="<?php
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <?php
+                        echo $this->ticked_complete("$row[rezerved_id]");
+                        ?>
+                        <img class="classimage_height card-img-top" data-src="<?php
+                                                                                echo $this->getimage($row['flight_id']);
+                                                                                ?>" src="<?php
                                                                                         echo $this->getimage($row['flight_id']);
                                                                                         ?>" alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text"><?php echo $row['name']; ?></p>
-                        <div class="card_body_grid d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=flight&id=$row[flight_id]"; ?>">Info</a>
-                             <?php
-                             
-                             if ($row['status'] == 0) {?>
-                                <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[rezerved_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
-         <?php } ?>
-                            </div>
-                            <small style="text-align: left;" class="text-muted"><?php
-                                                                                echo "$row[time_start] - $row[time_end] | " . $this->cuva_idf("price", "$row[flight_id]") . "$";
-                                                                                ?></small>
-                            <small style="text-align: left;" class="text-muted class-display-flex"><?php
-                                                                                                    echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]<br>
+                        <div class="card-body">
+                            <p class="card-text"><?php echo $row['name']; ?></p>
+                            <div class="card_body_grid d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=flight&id=$row[flight_id]"; ?>">Info</a>
+                                    <?php
+
+                                    if ($row['status'] == 0) { ?>
+                                        <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[rezerved_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
+                                    <?php }
+                                    if ($row['status'] == 2) {
+                                        echo '<a type="button" class="btn btn-sm btn-outline-secondary" onclick="ICR.ui.modal(\'class_review_title\','.$row["rezerved_id"].')" ><i class="bi bi-chat-left-dots margin-right-10"></i> Reviews | <i class="bi bi-star-half margin-right-10"></i> Score: 3</a>';
+                                    }
+                                    ?>
+                                </div>
+                                <small style="text-align: left;" class="text-muted"><?php
+                                                                                    echo "$row[time_start] - $row[time_end] | " . $this->cuva_idf("price", "$row[flight_id]") . "$";
+                                                                                    ?></small>
+                                <small style="text-align: left;" class="text-muted class-display-flex"><?php
+                                                                                                        echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]<br>
                    </small><small style='text-align: left;' class='text-muted class-display-flex'>
                    <i class='bi bi-geo-alt-fill margin-right-10'></i> Destination: " . $this->cuva_idf("name", "$row[flight_id]") . "</small>
                    
@@ -306,14 +322,14 @@ class ICR
                    ";
 
 
-                                                                                                    ?>
+                                                                                                        ?>
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <?php
-         }
+                <?php
+            }
         }
     }
 
@@ -329,7 +345,7 @@ class ICR
                     $sql2 = $this->Query("SELECT * FROM rezerved WHERE rezerved.flight_id = $row[flights_id] AND rezerved.user_id = $_SESSION[user_id]");
                     if (mysqli_num_rows($sql2) > 0) {
                         $row2 = mysqli_fetch_assoc($sql2);
-            ?>
+                ?>
 
 
 
@@ -392,8 +408,8 @@ class ICR
                             <img class="classimage_height card-img-top" data-src="<?php
                                                                                     echo $this->getimage($row['flights_id']);
                                                                                     ?>" src="<?php
-                                                                                            echo $this->getimage($row['flights_id']);
-                                                                                            ?>" alt="Card image cap">
+                                                                                                echo $this->getimage($row['flights_id']);
+                                                                                                ?>" alt="Card image cap">
                             <div class="card-body">
                                 <p class="card-text"><?php echo $row['name']; ?></p>
                                 <div class="card_body_grid d-flex justify-content-between align-items-center">
