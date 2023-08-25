@@ -10,7 +10,7 @@ Github respository: [https://github.com/Marko9827/ICR](https://github.com/Marko9
 
 # Screenshots
 
-![1692969699078](./icr/ICR_2.png)
-![1692969699078](./icr/ICR_3.png)
-![1692969699078](./icr/ICR_4.png)
-![1692969699078](./icr/ICR_5.png)
+![1692969699078](./ICR/ICR_2.png)
+![16929696993078](./ICR/ICR_3.png)
+![1692aer9696993078](./ICR/ICR_4.png)
+![169aer2969699078](./ICR/ICR_5.png)
