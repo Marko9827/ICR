@@ -8,7 +8,9 @@ Link: [http://localhost:3001](http://localhost:3001/f_b/)/
 
 Github respository: [https://github.com/Marko9827/ICR](https://github.com/Marko9827/ICR "Git respository")
 
-
+```
+rasa run actions && rasa run -m models --enable-api --cors "*" --debug
+```
 
 # Required for starting project
 
@@ -29,7 +31,7 @@ Intent Histogram
 Intent confusion Matrix
 ![1692969699078](./bot/results/intent_confusion_matrix.png)
 
-Story Confusion Matrix 
+Story Confusion Matrix
 ![1692969699078](./bot/results/story_confusion_matrix.png)
 
 # Screenshots
