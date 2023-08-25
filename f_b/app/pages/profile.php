@@ -47,7 +47,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="ICR.ui.modal_close()">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="ICR.login_reg('reg')">Save</button>
+                    <button type="button" class="btn btn-primary" onclick="ICR.ui.post_profile_edit()">Save</button>
                 </div>
             </div>
         </div>

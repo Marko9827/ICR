@@ -260,7 +260,25 @@ var ICR = {
         { name: 'Zimbabwe', code: 'ZW' }
     ],
     ui: {
-        post_comment:function(id){
+        post_profile_edit: function () {
+
+            $.ajax({
+                type: "POST",
+                url: "./?q=login_reg",
+                data: {
+                    what: "profile_edit",
+                    username: $(".modal#reg_modal #inputUsername").val(),
+                    surname: $(".modal#reg_modal #inputSurname").val(),
+                    email: $(".modal#reg_modal #inputEmail").val(),
+                    address: $(".modal#reg_modal #inputAdresse").val(),
+                    phone: $(".modal#reg_modal #inputPhone").val()
+                },
+                success: function (res) {
+                    // window.location.reload();
+                }
+            });
+        },
+        post_comment: function (id) {
             $.ajax({
                 type: "POST",
                 url: "./?q=login_reg",
@@ -273,10 +291,10 @@ var ICR = {
                 success: function (res) {
                     $("section.modal-body").html(res);
                 }, complete: function () {
-               
-    
+
+
                 }
-    
+
             });
         },
         checkout: {
