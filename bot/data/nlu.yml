@@ -1,6 +1,7 @@
 version: "3.1"
 
 nlu:
+
 - intent: greet
   examples: |
     - hey
@@ -24,6 +25,14 @@ nlu:
     - I want to buy new shoes
     - buy new shoes
     - I want to buy shoes
+  
+# operacije sa frondom
+- intent: logout
+    - I want to logout
+    - Logout me
+    - Logout
+    - Logout.
+    - Logout?
 
 #kupi odmah / sada
 - intent: buynowticket

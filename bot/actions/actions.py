@@ -11,10 +11,38 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
- 
- 
 
-    
+class ActionLogout(Action):
+
+    def name(self) -> Text:
+        return "action_logout"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        logout_hmm = {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                        "buttons": [
+                            {
+                                "title": "Details",  # details -> kao dugme
+                                "url": "/?p=flight&id=1",
+                                "type": "web_url"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+
+        dispatcher.utter_message(
+            text="Logout? Sure?", attachment=logout_hmm)
+        return []
+
 
 class ActionCarousel(Action):
 
@@ -92,8 +120,28 @@ class ActionCarousel(Action):
             }
 
         }
+        lgout = {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                        "buttons": [
+                            {
+                                "title": "Logout",  # details -> kao dugme
+                                "url": "/?p=logout",
+                                "type": "web_url"
+                            }
+                        ]
+                    }]
+            }
+        }
 
-        dispatcher.utter_message(
-            text="Here are some of our locations to visit!", attachment=new_carousel)
+        if self.name == "Logout":
+            dispatcher.utter_message(
+                text="Logout, sure?", attachment=lgout)
+        else:
+            dispatcher.utter_message(
+                text="Here are some of our locations to visit!", attachment=new_carousel)
 
         return []

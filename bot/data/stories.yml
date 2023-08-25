@@ -18,6 +18,7 @@ stories:
   - action: actions_list #actions.py... kod u akcijama
   - intent: buynowticket #buy now
   - intent: logout
+  - intent: action_logout
   - action: utter_logout
   - action: utter_buynowticket #za poruzbine > posetiti sajt
 

@@ -42,7 +42,8 @@ responses:
     - text: "I am a bot, powered by Rasa."
  
 actions:
-  - actions_list 
+  - actions_list
+  - actions_logout
 
 session_config:
   session_expiration_time: 60
