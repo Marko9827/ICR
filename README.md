@@ -2,7 +2,7 @@
 
 Run f_b(frond - backend) only by Apache, nginx,...
 
-But you can run by this command: cd f_b and `composer run sta` or `php -s localhost:3001 -dev`
+But you can run by this command: ```cd f_b``` and ```composer run sta``` or ```php -s localhost:3001 -dev```
 
 Link: [http://localhost:3001](http://localhost:3001/f_b/)/
 
