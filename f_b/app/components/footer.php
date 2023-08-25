@@ -34,14 +34,11 @@ function handlePayload(payload) {
     }
   }
 
-  window.addEventListener("message", event => {
-    console.log(event.data);
-    if (event.data === "open_link") {
-      // Call your JavaScript function to show the map
-      window.location.href = "/?p=logout";
+ 
+</script>
+<script>
+ 
 
-    }
-  });
 </script>
 </body>
 </html>

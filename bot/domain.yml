@@ -35,7 +35,9 @@ responses:
         - title: "Yes. Logout me."
           payload: "/open_link"   
 
-          
+  utter_search:
+    - text: "Search tickets:"
+
   utter_goodbye:
     - text: "Bye"
 
@@ -50,6 +52,8 @@ actions:
   - action_open_link
   - current_time
   - logout_mef
+  - action_search
+  - action_s_results
 
 session_config:
   session_expiration_time: 60

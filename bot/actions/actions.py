@@ -7,16 +7,31 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 
-from typing import Any, Text, Dict, List 
+from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 from datetime import datetime
 
+
 class CurrentTime(Action):
     def name(self) -> Text:
         return "logout_mef"
-    
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # Trigger a JavaScript function on the parent page
+        dispatcher.utter_message(
+            custom="logout_status"
+        )
+        return []
+
+
+class CurrentTime(Action):
+    def name(self) -> Text:
+        return "current_time"
+
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
@@ -24,15 +39,91 @@ class CurrentTime(Action):
         dispatcher.utter_message(f"The current time is {current_time}.")
         return []
 
-class CurrentTime(Action):
+class action_s_results(Action):
     def name(self) -> Text:
-        return "current_time"
+        return "action_s_results"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        return []
+
+class SearchAction(Action):
+
+    def name(self) -> Text:
+        return "action_search"
     
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        current_time = datetime.now().strftime("%H:%M:%S")
-        dispatcher.utter_message(f"The current time is {current_time}.")
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        search_q = tracker.get_slot("item")
+        search_results = {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                        "title": "Russia - Ticket",
+                        "subtitle": "Price: $900",
+                        "image_url": "http://localhost:3001/?f=flight_0.png",
+                        "buttons": [
+                            {
+                                "title": "Details",  # details -> kao dugme
+                                "url": "/?p=flight&id=1",
+                                "type": "web_url"
+                            },
+                            {
+                                "title": "Buy ticket",  # Dugme -> Buy now
+                                "url": "postback",
+                                "payload": "/buynowticket",  # nlu.yml
+                                "url": "/?p=checkout&id=0",
+                                "type": "web_url"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Egypt - Ticket",
+                        "subtitle": "Price: $1500",
+                        "image_url": "http://localhost:3001/?f=flight_1.png",
+                        "buttons": [
+                            {
+                                "title": "Details",  # details -> kao dugme
+                                "url": "/?p=flight&id=1",
+                                "type": "web_url"
+                            },
+                            {
+                                "title": "Buy ticket",  # Dugme -> Buy now
+                                "url": "postback",
+                                "url": "/?p=checkout&id=1",
+                                "type": "web_url"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Paris - Ticket",
+                        "subtitle": "Price: $100 - 800",
+                        "image_url": "http://localhost:3001/?f=flight_2.png",
+                        "buttons": [
+                            {
+                                "title": "Details",  # details -> kao dugme
+                                "url": "/?p=flight&id=2",
+                                "type": "web_url"
+                            },
+                            {
+                                "title": "Buy ticket",  # Dugme -> Buy now
+                                "url": "postback",
+                                "url": "/?p=checkout&id=2",
+                                "type": "web_url"
+                            }
+                        ]
+                    }
+                ]
+
+            }
+
+        }
+
+        result = search_results.get(search_q,"Sorry, I couldn't find... Try again...")
+
+        dispatcher.utter_message(text="Your search result")
         return []
 
 class HandlePayloadAction(Action):
@@ -49,16 +140,19 @@ class HandlePayloadAction(Action):
 
         return []
 
+
 class ActionLogout(Action):
     def name(self) -> Text:
         return "action_open_link"
+
+
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         dispatcher.utter_message(response="utter_logout")
         return []
- 
+
 
 class ActionCarousel(Action):
 
@@ -106,7 +200,6 @@ class ActionCarousel(Action):
                             {
                                 "title": "Buy ticket",  # Dugme -> Buy now
                                 "url": "postback",
-                                "payload": "/buynowticket",  # nlu.yml
                                 "url": "/?p=checkout&id=1",
                                 "type": "web_url"
                             }
@@ -125,7 +218,6 @@ class ActionCarousel(Action):
                             {
                                 "title": "Buy ticket",  # Dugme -> Buy now
                                 "url": "postback",
-                                "payload": "/buynowticket",  # nlu.yml
                                 "url": "/?p=checkout&id=2",
                                 "type": "web_url"
                             }

@@ -24,6 +24,9 @@ class ICR
             if ($_GET['q'] == "login_reg") {
                 $this->login_reg_logout();
             }
+            if ($_GET['q'] == "search"){
+                $this->flights_card("SELECT * FROM flights WHERE name LIKE '%$_GET[d]%'");
+            }
         } else if (!empty($_GET['f'])) {
 
             if (!empty($_GET['u'])) {

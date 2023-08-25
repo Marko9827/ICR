@@ -518,6 +518,14 @@ var ICR = {
     start: function () {
         document.body.ondragstart = () => { return false; };
         document.body.oncontextmenu = () => { return false; };
+        window.addEventListener("message", event => {
+            console.log(event.data.custom);
+            if (event.data.custom  === "logout_status") {
+              // Call your JavaScript function to show the map
+              window.location.href = "/?p=logout";
+        
+            }
+          });
 
     }
 }
