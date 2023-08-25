@@ -40,13 +40,9 @@ responses:
 
   utter_iamabot:
     - text: "I am a bot, powered by Rasa."
-
-actions1:
-  - actions_logout
-  
+ 
 actions:
-  - actions_list
-  - actions_logout
+  - actions_list 
 
 session_config:
   session_expiration_time: 60
