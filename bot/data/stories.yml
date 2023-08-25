@@ -17,6 +17,8 @@ stories:
   - intent: product_list #I want to buy new shoes
   - action: actions_list #actions.py... kod u akcijama
   - intent: buynowticket #buy now
+  - intent: logout
+  - action: utter_logout
   - action: utter_buynowticket #za poruzbine > posetiti sajt
 
 - story: sad path 1

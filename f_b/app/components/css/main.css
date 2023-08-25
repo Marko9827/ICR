@@ -449,8 +449,39 @@ section.modal-body {
 
 }
 
-.d-flex.mb-4.comment .fw-bold span
-{
-font-size: 10px;
-opacity: 0.5;
+.d-flex.mb-4.comment .fw-bold span {
+  font-size: 10px;
+  opacity: 0.5;
+}
+
+.col-md-3.col-md-Inline {
+  display: inline-flex;
+  width: fit-content;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  position: absolute;
+  padding-top: 15px;
+  padding-left: 10px;
+}
+
+.col-md-3.col-md-Inline label.form-label {
+  display: inline-flex;
+  width: max-content;
+  flex-wrap: nowrap;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-start;
+  margin: auto;
+}
+ 
+span.comm_time {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+span.comm_time i {
+    padding:0px 5px;
 }

@@ -11,6 +11,21 @@
     margin-top: 15px;
     margin-bottom: 0px !important;
 " onclick="ICR.ui.post_comment(<?php echo $_POST['id']; ?>)">Post review</button>
+ <div class="col-md-3 col-md-Inline">
+                                <label for="com_score" class="form-label"><i class="bi bi-star margin-right-10"></i></label>
+                                <select class="form-select airport_a" id="com_score" required>
+                                    <option disabled selected>Your score 0-5</option> 
+                                    <option value="0">0</option> 
+                                    <option value="1">1</option> 
+                                    <option value="2">2</option> 
+                                    <option value="3">3</option> 
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>  
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please select.
+                                </div>
+                            </div>
                     <div id="review-gate"></div>
                 </form>
         <?php }
@@ -27,7 +42,7 @@
 display: grid;
     text-align: left;
 
-"><?php echo $this->cuva_id("username", $row['user_id']); ?><span><?php echo date('m/d/Y H:i:s', $row["time"]); ?></span></div>
+"><?php echo $this->cuva_id("username", $row['user_id']); ?><span class="comm_time"><?php echo date('m/d/Y H:i:s', $row["time"]) . " | <i class='bi bi-star'></i> Score: $row[score]" ?></span></div>
                         </div>
                         <div class="ms-3">
 

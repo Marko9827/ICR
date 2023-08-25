@@ -121,8 +121,8 @@ class ICR
                     $id = time() * rand(0, 999);
                     $time = time();
                     $sql = $this->Query("INSERT INTO `comments` 
-                (`idcomments`, `text`, `user_id`, `post_id`, `time`) VALUES 
-                ('$id', '$_POST[msg]', '$_SESSION[user_id]', '$_POST[id]','$time');");
+                (`idcomments`, `text`, `user_id`, `post_id`, `time`, `score`) VALUES 
+                ('$id', '$_POST[msg]', '$_SESSION[user_id]', '$_POST[id]','$time', '$_POST[score]');");
 
 
                     if ($sql) {
@@ -144,7 +144,6 @@ class ICR
                     echo "YES";
                 }
             } else if ($_POST['what'] == "profile_edit") {
-                $id = time() * rand(0, 999999);
                 $sql = $this->Query("UPDATE `user` SET 
                 `username` = '$_POST[username]', 
                 `surname` = '$_POST[surname]',
@@ -152,7 +151,7 @@ class ICR
                 `adress` = '$_POST[address]', 
                 `phone` = '$_POST[phone]' WHERE (`id` = '$_SESSION[user_id]');");
                 if ($sql) {
-                    
+
 
                     echo "YES";
                 }
@@ -302,11 +301,32 @@ class ICR
 
         return $row[$what];
     }
+    function count_raiting($id){
+        $max = 0; 
+        $count = 0;
+        $swl = $this->Query("SELECT score, post_id FROM comments WHERE post_id = $id ORDER BY score");
+        if(mysqli_num_rows($swl) > 0){
+        while ($rowf = mysqli_fetch_assoc($swl)) {
+            
+            $max += $rowf['score'];// * ($count + 1);
+            $count++;
+            
+        }
+    }
+    $c =  round($max / $count) | 0;
+        return $c;
+    }
     function flights_card_f($sql)
     {
         $sql2 = $this->Query($sql);
         if (mysqli_num_rows($sql2) > 0) {
+
+            $score = 0;
+
+
             while ($row = mysqli_fetch_assoc($sql2)) {
+
+                $score = $this->count_raiting($row["rezerved_id"]);
 ?>
 
 
@@ -329,22 +349,22 @@ class ICR
                                     <?php
 
                                     if ($row['status'] == 0) { ?>
-                                        <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[rezerved_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
+                                        <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[rezerved_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i></a>
                                     <?php }
 
-                                    echo '<a type="button" class="btn btn-sm btn-outline-secondary" onclick="ICR.ui.modal(\'class_review_title\',' . $row["rezerved_id"] . ')" ><i class="bi bi-chat-left-dots margin-right-10"></i> Reviews | <i class="bi bi-star-half margin-right-10"></i> Score: 3</a>';
+                                    echo '<a type="button" class="btn btn-sm btn-outline-secondary" onclick="ICR.ui.modal(\'class_review_title\',' . $row["rezerved_id"] . ')" ><i class="bi bi-chat-left-dots margin-right-10"></i> Reviews | <i class="bi bi-star-half margin-right-10"></i>' . $score . '</a>';
 
                                     ?>
                                 </div>
                                 <small style="text-align: left;" class="text-muted"><?php
                                                                                     echo "$row[time_start] - $row[time_end] | " . $this->cuva_idf("price", "$row[flight_id]") . "$";
-                                                                                    ?></small><br>
+                                                                                    ?></small>
                                 <small style="text-align: left;" class="text-muted class-display-flex"><?php
-                                                                                                        echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]<br>
-                   </small><br><small style='text-align: left;' class='text-muted class-display-flex'>
-                   <i class='bi bi-geo-alt-fill margin-right-10'></i> Destination: " . $this->cuva_idf("name", "$row[flight_id]") . "</small><br>
+                                                                                                        echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]
+                   </small><small style='text-align: left;' class='text-muted class-display-flex'>
+                   <i class='bi bi-geo-alt-fill margin-right-10'></i> Destination: " . $this->cuva_idf("name", "$row[flight_id]") . "</small>
                    
-                   <small style='text-align: left;' class='text-muted class-display-flex'>Time of departure: $row[time_start]</small><br>
+                   <small style='text-align: left;' class='text-muted class-display-flex'>Time of departure: $row[time_start]</small>
                    <small style='text-align: left;' class='text-muted class-display-flex'>Return time: $row[time_end]</small>
 
                    ";
@@ -392,13 +412,13 @@ class ICR
                                     <div class="card_body_grid d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                             <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=flight&id=$row[flights_id]"; ?>">Info</a>
-                                            <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[flights_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i>Edit</a>
+                                            <a type="button" class="btn btn-sm btn-outline-secondary" href="<?php echo "./?p=ticket&what=edit&id=$row[flights_id]"; ?>"><i class="bi bi-pencil margin-right-10"></i></a>
                                         </div>
                                         <small style="text-align: left;" class="text-muted"><?php
                                                                                             echo "$row[time_flight] - $row[price]$";
                                                                                             ?></small>
                                         <small style="text-align: left;" class="text-muted class-display-flex"><?php
-                                                                                                                echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]<br>
+                                                                                                                echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]
                                </small><small style='text-align: left;' class='text-muted class-display-flex'>
                                <i class='bi bi-geo-alt-fill margin-right-10'></i> Destination: $row[airport_b] </small>
                                
@@ -449,10 +469,10 @@ class ICR
                                     </div>
                                     <small style="text-align: left;" class="text-muted"><?php
                                                                                         echo "$row[time_flight] - $row[price]$";
-                                                                                        ?></small><br>
+                                                                                        ?></small>
                                     <small style="text-align: left;" class="text-muted class-display-flex"><?php
-                                                                                                            echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]<br>
-                       </small><br><small style='text-align: left;' class='text-muted class-display-flex'>
+                                                                                                            echo "<i class='bi bi-airplane form-label-rotate-90 margin-right-10'></i> Departure: $row[airport_a]
+                       </small><small style='text-align: left;' class='text-muted class-display-flex'>
                        <i class='bi bi-airplane form-label-rotate-left margin-right-10'></i> Destination: $row[airport_b] </small>";
                                                                                                             ?>
                                 </div>

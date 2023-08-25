@@ -8,10 +8,13 @@
 # This is a simple example for a custom action which utters "Hello World!"
 
 from typing import Any, Text, Dict, List
-
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
+ 
+ 
+
+    
 
 class ActionCarousel(Action):
 
@@ -21,7 +24,6 @@ class ActionCarousel(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
 
         new_carousel = {
             "type": "template",
@@ -34,63 +36,64 @@ class ActionCarousel(Action):
                         "image_url": "http://localhost:3001/?f=flight_0.png",
                         "buttons": [
                             {
-                                "title": "Details", #details -> kao dugme
+                                "title": "Details",  # details -> kao dugme
                                 "url": "/?p=flight&id=1",
                                 "type": "web_url"
                             },
                             {
-                                "title": "Buy ticket", #Dugme -> Buy now
+                                "title": "Buy ticket",  # Dugme -> Buy now
                                 "url": "postback",
-                                "payload": "/buynowticket", #nlu.yml
+                                "payload": "/buynowticket",  # nlu.yml
                                 "url": "/?p=checkout&id=0",
                                 "type": "web_url"
-                            } 
+                            }
                         ]
                     },
-                     {
+                    {
                         "title": "Egypt - Ticket",
                         "subtitle": "Price: $1500",
                         "image_url": "http://localhost:3001/?f=flight_1.png",
                         "buttons": [
                             {
-                                "title": "Details", #details -> kao dugme
+                                "title": "Details",  # details -> kao dugme
                                 "url": "/?p=flight&id=1",
                                 "type": "web_url"
                             },
                             {
-                                "title": "Buy ticket", #Dugme -> Buy now
+                                "title": "Buy ticket",  # Dugme -> Buy now
                                 "url": "postback",
-                                "payload": "/buynowticket", #nlu.yml
+                                "payload": "/buynowticket",  # nlu.yml
                                 "url": "/?p=checkout&id=1",
                                 "type": "web_url"
-                            } 
+                            }
                         ]
                     },
-                     {
+                    {
                         "title": "Paris - Ticket",
                         "subtitle": "Price: $100 - 800",
                         "image_url": "http://localhost:3001/?f=flight_2.png",
                         "buttons": [
                             {
-                                "title": "Details", #details -> kao dugme
+                                "title": "Details",  # details -> kao dugme
                                 "url": "/?p=flight&id=2",
                                 "type": "web_url"
                             },
                             {
-                                "title": "Buy ticket", #Dugme -> Buy now
+                                "title": "Buy ticket",  # Dugme -> Buy now
                                 "url": "postback",
-                                "payload": "/buynowticket", #nlu.yml
+                                "payload": "/buynowticket",  # nlu.yml
                                 "url": "/?p=checkout&id=2",
                                 "type": "web_url"
-                            } 
+                            }
                         ]
-                    } 
+                    }
                 ]
 
             }
 
         }
 
-        dispatcher.utter_message(text="Here are some of our locations to visit!", attachment=new_carousel)
+        dispatcher.utter_message(
+            text="Here are some of our locations to visit!", attachment=new_carousel)
 
         return []

@@ -65,8 +65,7 @@
                                 <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
                                     <img src="<?php echo "./?f=cover&u=p$_SESSION[user_id]"; ?>" alt="Avatar" class="img-fluid my-5" style="width: 80px; border-radius:150px;" />
                                     <h5><?php echo "$rowF[username] $rowF[surname]"; ?></h5>
-
-                                    <i class="far fa-edit mb-5"></i>
+ 
                                 </div>
                                 <div class="col-md-8">
                                     <i class="bi bi-pencil edit_pen" onclick="ICR.ui.modal('edit_profile_modal')" data-toggle="tooltip" data-placement="right" title="Edit profile"></i>

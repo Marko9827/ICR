@@ -260,6 +260,11 @@ var ICR = {
         { name: 'Zimbabwe', code: 'ZW' }
     ],
     ui: {
+        score: {
+            percentage(partialValue, totalValue) {
+                return (100 * partialValue) / totalValue;
+            }
+        },
         post_profile_edit: function () {
 
             $.ajax({
@@ -267,17 +272,21 @@ var ICR = {
                 url: "./?q=login_reg",
                 data: {
                     what: "profile_edit",
-                    username: $(".modal#reg_modal #inputUsername").val(),
-                    surname: $(".modal#reg_modal #inputSurname").val(),
-                    email: $(".modal#reg_modal #inputEmail").val(),
-                    address: $(".modal#reg_modal #inputAdresse").val(),
-                    phone: $(".modal#reg_modal #inputPhone").val()
+                    username: $(".modal#edit_profile_modal #inputUsername").val(),
+                    surname: $(".modal#edit_profile_modal #inputSurname").val(),
+                    email: $(".modal#edit_profile_modal #inputEmail").val(),
+                    address: $(".modal#edit_profile_modal #inputAdresse").val(),
+                    phone: $(".modal#edit_profile_modal #inputPhone").val()
                 },
                 success: function (res) {
-                    // window.location.reload();
+                    if (res == "YES") {
+                        window.location.href = "./?p=profile";
+                    }
                 }
+
             });
         },
+
         post_comment: function (id) {
             $.ajax({
                 type: "POST",
@@ -286,6 +295,7 @@ var ICR = {
                     what: 'class_review_title',
                     hmm: "new_comment",
                     msg: $("section.modal-body textarea.form-control").val(),
+                    score: $("#com_score").val(),
                     id: id
                 },
                 success: function (res) {

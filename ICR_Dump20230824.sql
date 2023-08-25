@@ -46,6 +46,34 @@ INSERT INTO `_prisma_migrations` VALUES ('5c22b27d-12df-4e4e-a247-44da1b3c2d31',
 UNLOCK TABLES;
 
 --
+-- Table structure for table `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `comments` (
+  `idcomments` bigint NOT NULL,
+  `text` varchar(1500) DEFAULT NULL,
+  `user_id` bigint DEFAULT NULL,
+  `post_id` bigint DEFAULT NULL,
+  `time` bigint DEFAULT NULL,
+  `score` int DEFAULT '0',
+  PRIMARY KEY (`idcomments`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comments`
+--
+
+LOCK TABLES `comments` WRITE;
+/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+INSERT INTO `comments` VALUES (234234234,'Is cool',0,1271372577228,1692906228,0),(162523306464,'tttest',0,1271372577228,1692951109,0),(242094169031,'aer',0,1271372577228,1692966217,5),(353826782826,'aeteatea',0,1271372577228,1692951114,0),(470644033422,'aeraer',0,1271372577228,1692964149,0),(489267363295,'aeraerea',0,1271372577228,1692966655,5),(1344213567654,'teaet',0,1271372577228,1692964191,2),(1569380092893,'aereareaear',0,1271372577228,1692966659,5);
+/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `flights`
 --
 
@@ -135,7 +163,7 @@ CREATE TABLE `rezerved` (
 
 LOCK TABLES `rezerved` WRITE;
 /*!40000 ALTER TABLE `rezerved` DISABLE KEYS */;
-INSERT INTO `rezerved` VALUES (253924299300,116534295215520,1692828662,0,'2023-08-25','2023-08-28','Argentina',NULL,1,0),(763465762642,0,1692828742,1,'2023-08-25','2023-08-27','Honduras',NULL,2,0),(1339077977783,0,1692892513,2,'2023-08-25','2023-08-28','Saint Lucia',NULL,5,0),(1642112354950,0,1692899335,1,'2023-08-29','2023-09-20','Angola',NULL,9,0);
+INSERT INTO `rezerved` VALUES (253924299300,116534295215520,1692828662,0,'2023-08-25','2023-08-28','Argentina',NULL,1,0),(763465762642,0,1692828742,1,'2023-08-25','2023-08-27','Honduras',NULL,7,0),(1271372577228,0,1692906228,0,'2023-08-25','2023-09-01','Croatia',NULL,8,2),(1339077977783,0,1692892513,2,'2023-08-25','2023-08-28','Saint Lucia',NULL,5,1),(1642112354950,0,1692899335,1,'2023-08-29','2023-09-20','Angola',NULL,9,0);
 /*!40000 ALTER TABLE `rezerved` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +199,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (0,NULL,'Pera','pera@test.com','123','Belgrade',34234234,0,0,0,'Peric'),(116534295215520,NULL,'pera@test.com','pera@test1.com','123','f3a3f',4234134,0,0,0,NULL),(1175428756773614,NULL,'pera@test.com','pera@test2.com','123','rearearea',342234242343,0,0,0,NULL);
+INSERT INTO `user` VALUES (0,NULL,'Pera','pera@test.com','123','Belgrade',34234234,0,0,0,'Per3'),(116534295215520,NULL,'pera@test.com','pera@test1.com','123','f3a3f',4234134,0,0,0,NULL),(1175428756773614,NULL,'pera@test.com','pera@test2.com','123','rearearea',342234242343,0,0,0,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -184,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-24 20:20:53
+-- Dump completed on 2023-08-25 14:40:36
