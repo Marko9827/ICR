@@ -260,6 +260,25 @@ var ICR = {
         { name: 'Zimbabwe', code: 'ZW' }
     ],
     ui: {
+        post_comment:function(id){
+            $.ajax({
+                type: "POST",
+                url: "./?q=login_reg",
+                data: {
+                    what: 'class_review_title',
+                    hmm: "new_comment",
+                    msg: $("section.modal-body textarea.form-control").val(),
+                    id: id
+                },
+                success: function (res) {
+                    $("section.modal-body").html(res);
+                }, complete: function () {
+               
+    
+                }
+    
+            });
+        },
         checkout: {
             chk: function (t) {
                 if (t.checked) {
@@ -348,18 +367,32 @@ var ICR = {
 
                     $(str).addClass("show_active");
                     if (what == "class_review_title") {
-                         $.ajax({
+                        $.ajax({
                             type: "POST",
                             url: "./?q=login_reg",
                             data: {
                                 what: what,
-                                hmm:"get_all",
+                                hmm: "get_all",
                                 id: id
                             },
                             success: function (res) {
-                               $("section.modal-body").html(res);
+                                $("section.modal-body").html(res);
+                            }, complete: function () {
+                                $('#review-gate').reviewGate({
+                                    navbarColor: '#0f18e9',
+                                    onUpdate: function (count) {
+                                        if (count >= 5) {
+                                            // Do something on good review
+                                            $('#review-gate').reviewGate('step', 2);
+                                        } else {
+                                            // Do something on bad review
+                                            $('#review-gate').reviewGate('step', 3);
+                                        }
+                                    },
+                                });
+
                             }
-                
+
                         });
                     }
                 }
@@ -367,7 +400,7 @@ var ICR = {
             }
         }
     },
-    login_reg: function (w) {
+    login_reg: function (w,) {
         var data = {};
         if (w == "logout") {
             data = {
@@ -457,6 +490,7 @@ var ICR = {
     start: function () {
         document.body.ondragstart = () => { return false; };
         document.body.oncontextmenu = () => { return false; };
+
     }
 }
 

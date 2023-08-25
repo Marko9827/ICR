@@ -117,15 +117,17 @@ class ICR
                 if ($_POST['hmm'] == "get_all") {
                     $this->recentison_and_comment_loader("$_POST[id]");
                 }
-                if ($_POST['hmm'] == "new") {
+                if ($_POST['hmm'] == "new_comment") {
                     $id = time() * rand(0, 999);
                     $time = time();
                     $sql = $this->Query("INSERT INTO `comments` 
                 (`idcomments`, `text`, `user_id`, `post_id`, `time`) VALUES 
                 ('$id', '$_POST[msg]', '$_SESSION[user_id]', '$_POST[id]','$time');");
-                }
-                if ($sql) {
-                    echo "YES";
+
+
+                    if ($sql) {
+                        $this->recentison_and_comment_loader("$_POST[id]");
+                    }
                 }
             } else if ($_POST['what'] == "ticked_edit") {
                 $id = time() * rand(0, 999);

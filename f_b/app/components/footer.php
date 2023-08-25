@@ -16,6 +16,12 @@ $this->include("components/bot_ui.php");
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
 ></script>
 <script>
+    <?php 
+     
+     $this->include("components/js/raiting.js");
+     ?>
+</script>
+<script>
   <?php 
      
      $this->include("components/js/main.js");

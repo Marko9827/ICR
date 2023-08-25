@@ -6,7 +6,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title class_review_title" id="class_review_title"></h5>
+                <h5 class="modal-title class_review_title" id="class_review_title">Review Ticket</h5>
                 <button type="button" class="close" aria-label="Close" onclick="ICR.ui.modal_close()">
                     <span aria-hidden="true">&times;</span>
                 </button>
