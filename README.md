@@ -23,9 +23,14 @@ Github respository: [https://github.com/Marko9827/ICR](https://github.com/Marko9
 
 # Bot lasted tests
 
+Intent Histogram
 ![1692969699078](./bot/results/intent_histogram.png)
+
+Intent confusion Matrix
 ![1692969699078](./bot/results/intent_confusion_matrix.png)
 
+Story Confusion Matrix 
+![1692969699078](./bot/results/story_confusion_matrix.png)
 
 # Screenshots
 
