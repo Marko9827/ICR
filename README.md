@@ -21,6 +21,12 @@ Github respository: [https://github.com/Marko9827/ICR](https://github.com/Marko9
   * Download for: [X64](https://aka.ms/vs/17/release/vc_redist.x64.exe)
   * More info: [https://learn.microsoft.com/cpp](https://learn.microsoft.com/cpp)
 
+# Bot lasted tests
+
+![1692969699078](./bot/results/intent_histogram.png)
+![1692969699078](./bot/results/intent_confusion_matrix.png)
+
+
 # Screenshots
 
 This is what the home page looks like, with available flights. Every flight has an Info I Book a ticket button.
