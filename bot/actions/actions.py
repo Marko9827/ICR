@@ -7,42 +7,58 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 
-from typing import Any, Text, Dict, List
+from typing import Any, Text, Dict, List 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet
+from datetime import datetime
 
-
-class ActionLogout(Action):
-
+class CurrentTime(Action):
     def name(self) -> Text:
-        return "action_logout"
+        return "logout_mef"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        current_time = datetime.now().strftime("%H:%M:%S")
+        dispatcher.utter_message(f"The current time is {current_time}.")
+        return []
+
+class CurrentTime(Action):
+    def name(self) -> Text:
+        return "current_time"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        current_time = datetime.now().strftime("%H:%M:%S")
+        dispatcher.utter_message(f"The current time is {current_time}.")
+        return []
+
+class HandlePayloadAction(Action):
+    def name(self) -> Text:
+        return "action_handle_payload"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        payload = tracker.get_slot("payload")
 
-        logout_hmm = {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [
-                    {
-                        "buttons": [
-                            {
-                                "title": "Details",  # details -> kao dugme
-                                "url": "/?p=flight&id=1",
-                                "type": "web_url"
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
+        if payload == "/open_link":
+            return [SlotSet("payload", "/open_link")]
 
-        dispatcher.utter_message(
-            text="Logout? Sure?", attachment=logout_hmm)
         return []
 
+class ActionLogout(Action):
+    def name(self) -> Text:
+        return "action_open_link"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(response="utter_logout")
+        return []
+ 
 
 class ActionCarousel(Action):
 
@@ -137,11 +153,7 @@ class ActionCarousel(Action):
             }
         }
 
-        if self.name == "Logout":
-            dispatcher.utter_message(
-                text="Logout, sure?", attachment=lgout)
-        else:
-            dispatcher.utter_message(
-                text="Here are some of our locations to visit!", attachment=new_carousel)
+        dispatcher.utter_message(
+            text="Here are some of our locations to visit!", attachment=new_carousel)
 
         return []

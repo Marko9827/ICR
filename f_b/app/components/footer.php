@@ -27,6 +27,21 @@ $this->include("components/bot_ui.php");
      $this->include("components/js/main.js");
      ?>
 
+function handlePayload(payload) {
+  alert(payload);
+    if (payload === "/open_link") {
+      window.location.href = "/?p=logout";
+    }
+  }
+
+  window.addEventListener("message", event => {
+    console.log(event.data);
+    if (event.data === "open_link") {
+      // Call your JavaScript function to show the map
+      window.location.href = "/?p=logout";
+
+    }
+  });
 </script>
 </body>
 </html>

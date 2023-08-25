@@ -28,22 +28,28 @@ responses:
 
   utter_happy:
     - text: "Great, carry on!"
-
+ 
   utter_logout:
     - text: "Logout, sure?"
       buttons:
-        - title: "Logout"
-          payload: "./?p=logout"
+        - title: "Yes. Logout me."
+          payload: "/open_link"   
 
+          
   utter_goodbye:
     - text: "Bye"
 
   utter_iamabot:
     - text: "I am a bot, powered by Rasa."
- 
+
 actions:
   - actions_list
   - actions_logout
+  - utter_logout 
+  - action_handle_payload
+  - action_open_link
+  - current_time
+  - logout_mef
 
 session_config:
   session_expiration_time: 60

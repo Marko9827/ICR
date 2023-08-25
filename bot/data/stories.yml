@@ -1,43 +1,53 @@
 version: "3.1"
 
 stories:
+  - story: happy path
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_great
+      - action: utter_happy
+  - story: logout
+    steps:
+      - intent: logout_me
+      - action: logout_mef
+ 
+  - story: curren time
+    steps: 
+      - intent: ask_time
+      - action: current_time
+  - story: logout path
+    steps:
+      - intent: logout
+      - action: utter_logout
 
-- story: happy path
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
+  #prica kupaca
+  - story: the script
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: product_list #I want to buy new shoes
+      - action: actions_list #actions.py... kod u akcijama
+      - intent: buynowticket #buy now  
+      - action: utter_logout
+      - action: utter_buynowticket #za poruzbine > posetiti sajt
 
-#prica kupaca
-- story: the script
-  steps: 
-  - intent: greet
-  - action: utter_greet
-  - intent: product_list #I want to buy new shoes
-  - action: actions_list #actions.py... kod u akcijama
-  - intent: buynowticket #buy now
-  - intent: logout
-  - intent: action_logout
-  - action: utter_logout
-  - action: utter_buynowticket #za poruzbine > posetiti sajt
+  - story: sad path 1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_unhappy
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: affirm
+      - action: utter_happy 
 
-- story: sad path 1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
-
-- story: sad path 2
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+  - story: sad path 2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_unhappy
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_goodbye
