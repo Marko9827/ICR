@@ -24,8 +24,45 @@ class ICR
             if ($_GET['q'] == "login_reg") {
                 $this->login_reg_logout();
             }
-            if ($_GET['q'] == "search"){
-                $this->flights_card("SELECT * FROM flights WHERE name LIKE '%$_GET[d]%'");
+            if ($_GET['q'] == "search") {
+                // $this->flights_card("SELECT * FROM flights WHERE name LIKE '%$_GET[d]%'");
+
+                $query = $this->Query("SELECT * FROM flights WHERE name LIKE '%$_GET[d]%'");
+                $jr = "";
+                if (mysqli_num_rows($query) > 0) {
+
+                    while ($row = mysqli_fetch_assoc($query)) {
+                        $jr .= '
+                        {
+                            "title": "'.$row['name'].' - Ticket",
+                            "subtitle": "Price: $'.$row['price'].'",
+                            "image_url": "'.$this->getimage($row['flights_id']).'",
+                            "buttons": [
+                                {
+                                    "title": "Details",  # details -> kao dugme
+                                    "url": "/?p=flight&id='.$row['flights_id'].'",
+                                    "type": "web_url"
+                                },
+                                {
+                                    "title": "Buy ticket",  # Dugme -> Buy now
+                                    "url": "postback",
+                                    "payload": "/buynowticket",  # nlu.yml
+                                    "url": "/?p=checkout&id=0",
+                                    "type": "web_url"
+                                }
+                            ]
+                        }';
+                    }
+                }
+                $r =  '{
+                    "type" : "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [ '.$jr.']
+        
+                    }';
+                header("content-type: text/json");
+                echo $r;
             }
         } else if (!empty($_GET['f'])) {
 
@@ -304,19 +341,19 @@ class ICR
 
         return $row[$what];
     }
-    function count_raiting($id){
-        $max = 0; 
+    function count_raiting($id)
+    {
+        $max = 0;
         $count = 0;
         $swl = $this->Query("SELECT score, post_id FROM comments WHERE post_id = $id ORDER BY score");
-        if(mysqli_num_rows($swl) > 0){
-        while ($rowf = mysqli_fetch_assoc($swl)) {
-            
-            $max += $rowf['score'];// * ($count + 1);
-            $count++;
-            
+        if (mysqli_num_rows($swl) > 0) {
+            while ($rowf = mysqli_fetch_assoc($swl)) {
+
+                $max += $rowf['score']; // * ($count + 1);
+                $count++;
+            }
         }
-    }
-    $c =  round($max / $count) | 0;
+        $c =  round($max / $count) | 0;
         return $c;
     }
     function flights_card_f($sql)

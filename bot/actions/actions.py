@@ -9,6 +9,7 @@
 
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
+from requests import Request
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 from datetime import datetime
@@ -54,76 +55,18 @@ class SearchAction(Action):
     
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+
+
         search_q = tracker.get_slot("item")
-        search_results = {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [
-                    {
-                        "title": "Russia - Ticket",
-                        "subtitle": "Price: $900",
-                        "image_url": "http://localhost:3001/?f=flight_0.png",
-                        "buttons": [
-                            {
-                                "title": "Details",  # details -> kao dugme
-                                "url": "/?p=flight&id=1",
-                                "type": "web_url"
-                            },
-                            {
-                                "title": "Buy ticket",  # Dugme -> Buy now
-                                "url": "postback",
-                                "payload": "/buynowticket",  # nlu.yml
-                                "url": "/?p=checkout&id=0",
-                                "type": "web_url"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Egypt - Ticket",
-                        "subtitle": "Price: $1500",
-                        "image_url": "http://localhost:3001/?f=flight_1.png",
-                        "buttons": [
-                            {
-                                "title": "Details",  # details -> kao dugme
-                                "url": "/?p=flight&id=1",
-                                "type": "web_url"
-                            },
-                            {
-                                "title": "Buy ticket",  # Dugme -> Buy now
-                                "url": "postback",
-                                "url": "/?p=checkout&id=1",
-                                "type": "web_url"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Paris - Ticket",
-                        "subtitle": "Price: $100 - 800",
-                        "image_url": "http://localhost:3001/?f=flight_2.png",
-                        "buttons": [
-                            {
-                                "title": "Details",  # details -> kao dugme
-                                "url": "/?p=flight&id=2",
-                                "type": "web_url"
-                            },
-                            {
-                                "title": "Buy ticket",  # Dugme -> Buy now
-                                "url": "postback",
-                                "url": "/?p=checkout&id=2",
-                                "type": "web_url"
-                            }
-                        ]
-                    }
-                ]
+ 
+        response = requests.get('http://localhost:3001/?q=search&d=' + search_q)
+ 
+        search_results = response.json()
+ 
+ 
 
-            }
-
-        }
-
-        result = search_results.get(search_q,"Sorry, I couldn't find... Try again...")
-
-        dispatcher.utter_message(text="Your search result")
+ 
+        dispatcher.utter_message(text="Your search result",attachment=search_results)
         return []
 
 class HandlePayloadAction(Action):

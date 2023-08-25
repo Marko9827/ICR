@@ -4,7 +4,8 @@ nlu:
 
   - intent: action_search
     examples: |
-      - Find info about [name](item)
+      - Find info about (item)
+      - Search (item) 
 
   - intent: ask_time
     examples: |

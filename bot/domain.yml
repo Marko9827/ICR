@@ -11,8 +11,11 @@ intents:
   - product_list
   - buynowticket
   - logout
+  - search
 
 responses:
+  utter_search_tickets:
+    - text: "Search ticket: {results}" 
   utter_greet:
     - text: "Hey! How are you?"
 
