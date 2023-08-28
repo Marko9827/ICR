@@ -14,10 +14,10 @@
           </a>
 
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <?php 
-        echo $this->menu_active($_GET['p']);
-        ?>
-        </ul>
+            <?php
+            echo $this->menu_active($_GET['p']);
+            ?>
+          </ul>
 
           <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
             <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
@@ -52,13 +52,12 @@
               <use xlink:href="#bootstrap" />
             </svg>
           </a>
-
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
           </ul>
 
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-            <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" onsubmit="return false;">
+            <input onkeydown="ICR.ui.search(this);" type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
           </form>
 
           <div class="text-end">

@@ -5,7 +5,7 @@
     <div class="album py-5  ">
         <div class="container">
      
-            <div class="row">
+            <div class="row row_home_page">
     <?php 
     $this->flights_card("SELECT * FROM flights ORDER BY flights_id");
     ?>

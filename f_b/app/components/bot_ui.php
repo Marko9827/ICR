@@ -21,12 +21,12 @@
     border: 1px #b52626 solid;
   }
 </style>
-<script>
+ <script>
   !(function() {
     let e = document.createElement("script"),
       t = document.head || document.getElementsByTagName("head")[0];
     (e.src =
-      "https://cdn.jsdelivr.net/npm/rasa-webchat/lib/index.js"),
+      "./node_modules/rasa-webchat/lib/index.js"),
     // Replace 1.x.x with the version that you want
     (e.async = !0),
     (e.onload = () => {

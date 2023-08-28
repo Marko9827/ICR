@@ -381,6 +381,11 @@ var ICR = {
         modal_close: function () {
             $(`.modal`).removeClass("show_active");
         },
+        search: function(t){
+            $.get(`./?q=search&d=${$(t).val()}`,function(a){
+                $(".row_home_page").html(a);
+            });
+        },
         modal: function (what, id = 0) {
             if (what == "CLOSE") {
                 $(`.modal`).removeClass("show_active");

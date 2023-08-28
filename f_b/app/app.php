@@ -25,22 +25,23 @@ class ICR
                 $this->login_reg_logout();
             }
             if ($_GET['q'] == "search") {
+                if (!empty($_GET['d'])){
                 // $this->flights_card("SELECT * FROM flights WHERE name LIKE '%$_GET[d]%'");
+                if (!empty($_GET['json'])) {
+                    $query = $this->Query("SELECT * FROM flights WHERE name LIKE '%$_GET[d]%'");
+                    $jr = "";
+                    if (mysqli_num_rows($query) > 0) {
 
-                $query = $this->Query("SELECT * FROM flights WHERE name LIKE '%$_GET[d]%'");
-                $jr = "";
-                if (mysqli_num_rows($query) > 0) {
-
-                    while ($row = mysqli_fetch_assoc($query)) {
-                        $jr .= '
+                        while ($row = mysqli_fetch_assoc($query)) {
+                            $jr .= '
                         {
-                            "title": "'.$row['name'].' - Ticket",
-                            "subtitle": "Price: $'.$row['price'].'",
-                            "image_url": "'.$this->getimage($row['flights_id']).'",
+                            "title": "' . $row['name'] . ' - Ticket",
+                            "subtitle": "Price: $' . $row['price'] . '",
+                            "image_url": "' . $this->getimage($row['flights_id']) . '",
                             "buttons": [
                                 {
                                     "title": "Details",  # details -> kao dugme
-                                    "url": "/?p=flight&id='.$row['flights_id'].'",
+                                    "url": "/?p=flight&id=' . $row['flights_id'] . '",
                                     "type": "web_url"
                                 },
                                 {
@@ -52,17 +53,23 @@ class ICR
                                 }
                             ]
                         }';
+                        }
                     }
-                }
-                $r =  '{
+                    $r =  '{
                     "type" : "template",
                     "payload": {
                         "template_type": "generic",
-                        "elements": [ '.$jr.']
+                        "elements": [ ' . $jr . ']
         
                     }';
-                header("content-type: text/json");
-                echo $r;
+                    header("content-type: text/json");
+                    echo $r;
+                } else {
+                    $this->flights_card("SELECT * FROM flights WHERE name LIKE '%$_GET[d]%'");
+                }
+            }else{
+                $this->flights_card("SELECT * FROM flights ORDER BY flights_id");
+            }
             }
         } else if (!empty($_GET['f'])) {
 
