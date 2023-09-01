@@ -1,7 +1,10 @@
-
+<?php 
+if(!$_GET['p'] == "profile"){
+?>
 <footer   class="  text-center text-body-secondary bg-body-tertiary">
   By <a href="https://github.com/marko9827/ICR" target="_blank">github.com/marko9827</a>
 </footer>
+<?php } ?>
 <?php 
 $this->include("components/bot_ui.php");
 ?>
