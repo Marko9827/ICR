@@ -64,3 +64,12 @@ Journal view of tickets [ Comments and raiting tickets ]
 Video tutorial / presentation Click to bottom image
 
 [![Watch the video](https://img.youtube.com/vi/na_LhwSpzOE/maxresdefault.jpg)](https://youtu.be/na_LhwSpzOE)
+ 
+
+# Info page [ Full size ]
+--------------------------
+
+
+ 
+
+![169aer2969699078](./ICR/ICR_8.png)
