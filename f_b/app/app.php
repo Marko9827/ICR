@@ -533,7 +533,7 @@ class ICR
             }
             function menu_active($page)
             {
-                $array = ["Home", "Journal"];
+                $array = ["Home", "Journal","Info"];
                 $r = '';
                 foreach ($array as $val) {
                     if ($page == $val) {
@@ -543,7 +543,7 @@ class ICR
                     }
                 }
                 $r .= "<li><a onclick='ICR.chat.o(this);' class='nav-link px-2  link-secondary  '>Help</a></li>";
-
+ 
                 return $r;
                 /*
         <li><a href="./" class="nav-link px-2 link-secondary">Home</a></li>
