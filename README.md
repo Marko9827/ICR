@@ -61,6 +61,6 @@ Journal view of tickets [ Comments and raiting tickets ]
 
 ![169aer2969699078](./ICR/ICR_6.png)
 
-Video tutorial / presentation
+Video tutorial / presentation Click to bottom image
 
-<iframe width="962" height="551" src="https://www.youtube.com/embed/na_LhwSpzOE" title="Faks video   1693568046652" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+[![Watch the video](https://img.youtube.com/vi/na_LhwSpzOE/maxresdefault.jpg)](https://youtu.be/na_LhwSpzOE)
