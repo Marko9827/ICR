@@ -56,3 +56,11 @@ Information about one of the destinations [Full screenshot of the page]
 Journal view of tickets [ Completed (flight, green) , upcoming (purple), and canceled (order) ]
 
 ![169aer2969699078](./ICR/ICR_5.png)
+
+Journal view of tickets [ Comments and raiting tickets ]
+
+![169aer2969699078](./ICR/ICR_6.png)
+
+Video tutorial / presentation
+
+<iframe width="962" height="551" src="https://www.youtube.com/embed/na_LhwSpzOE" title="Faks video   1693568046652" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
